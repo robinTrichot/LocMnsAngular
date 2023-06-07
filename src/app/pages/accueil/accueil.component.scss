@@ -1,0 +1,141 @@
+// ----------------------HEADER----------------------
+
+.container-fluid.header-line {
+    border-bottom: 2px solid #FF5B2F;
+}
+
+.menuIcons {
+    margin-top: 45px;
+    font-size: 50px;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
+.userIcon {
+    font-size: 30px;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
+.logout-align-right {
+    float: right;
+}
+
+.logoMns {
+    margin-top: 10px;
+
+    img {
+        max-width: 20%;
+        max-height: 20%;
+    }
+}
+
+.userPicture {
+    display: flex;
+    align-items: center;
+
+    .material-symbols-outlined {
+        margin-right: 10px;
+    }
+}
+
+.logoMns,
+.dateFormatted,
+.userPicture {
+    margin-bottom: 10px;
+}
+
+.logoAdmin {
+position: relative;
+
+    &:hover {
+        cursor: pointer;
+
+        span.material-symbols-outlined::after {
+            content: "ADMINISTRATION";
+            position: absolute;
+            top: calc(100% + 10px);
+            /* Position sous l'image */
+            right: 10%;
+            background-color: #FF5B2F;
+            padding: 5px;
+            color: black;
+            font-size: 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+    }
+}
+
+.logoMail {
+        cursor: pointer;
+}
+
+
+.logoAlert {
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+
+        span.material-symbols-outlined::after {
+            content: "NOTIFICATION(S)";
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 10%;
+            background-color: #FF5B2F;
+            padding: 5px;
+            color: black;
+            font-size: 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+    }
+}
+
+.logout {
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+
+        span.material-symbols-outlined::after {
+            content: "quitter";
+            position: absolute;
+            top: calc(100% + 60px);
+            right: 10%;
+            background-color: #FF5B2F;
+            padding: 5px;
+            color: black;
+            font-size: 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+    }
+}
+
+// ----------------------BODY----------------------
+
+.orange-border {
+    border: 2px solid #FF5B2F;
+}
+
+.my-2.flex-fill.d-flex.align-items-center.justify-content-center.orange-border {
+    cursor: pointer;
+}
+
+// ----------------------FOOTER----------------------
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    line-height: 50px;
+}

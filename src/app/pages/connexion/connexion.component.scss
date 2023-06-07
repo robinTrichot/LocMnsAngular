@@ -1,0 +1,260 @@
+.iConnexion {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+
+
+.text-center {
+  border: 1px solid black;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.mainF {
+flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.locMnsLogoText {
+  position: relative;
+  animation-name: loc-appear;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+  display: flex;
+  justify-content: left; 
+  align-items: left; 
+}
+
+.word-animation {
+  position: relative;
+  animation-name: word-appear;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+  height: 5%; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+@keyframes word-appear {
+  from { top: -50px; }
+  to { top: 50px; }
+}
+
+@keyframes loc-appear {
+  from { left: -50px; }
+  to { left: 50px; }
+}
+
+#span {
+  z-index: 2;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#logoMns {
+  width : 120px;
+height : 50px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+  line-height: 50px;
+
+  img {
+  width: 50px;
+  height: 50px;
+  }
+  
+}
+
+body {
+  z-index: 1;
+  background-color: rgb(142, 177, 177);
+  min-height: 100vh;
+  margin: 0;
+	padding: 0;
+}
+
+
+
+
+.divLogo {
+  position: relative;
+  left: 50px;
+  top: 20px;
+  animation-name: apparition;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+
+.divTestTop {
+  position: relative;
+  top: 70px;
+  animation-name: apparitionTop;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  align-items: center;
+  text-align: center;
+
+}
+
+@keyframes apparitionTop {
+  0% {
+    top: -50px;
+    opacity: 0;
+  }
+  100% {
+    top: 70px;
+    opacity: 1;
+  }
+}
+
+@keyframes apparition {
+  0% {
+    left: -50px;
+    top: 20px;
+    opacity: 0;
+  }
+  100% {
+    left: 50;
+    top: 20px;
+    opacity: 1;
+  }
+  
+}
+
+/* ↓↓↓ ci dessous centre de la page ↓↓↓ */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1%;
+  animation-name: apparitionForm;
+  animation-duration: 5s;
+}
+
+.elements {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.elements div {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+input::placeholder {
+  color: orange;
+  text-align: center;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+
+
+/* ↑↑↑ ci dessus centre de la page ↑↑↑ */
+
+ .divAsking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50px;
+ }
+
+
+
+.footer-animation {
+  position: relative;
+  left: -100%;
+  animation: footerToRight 2s ease-out forwards;
+  text-align: right;
+}
+
+@keyframes footerToRight {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: -1%;
+  }
+}
+
+@keyframes apparitionForm {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-animation {
+    left: 0;
+    text-align: left;
+  }
+  .divLogo {
+    left: 0;
+    text-align: left;
+  }
+}
+
+
+
+
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .material-icons-outlined {
+    margin-left: 5px;
+  }
+
+  .custom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .custom-button:hover {
+    background-color: #0069d9;
+  }
+
+  .material-symbols-outlined {
+    margin-left: 15px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    height: 80px;
+}
+
+

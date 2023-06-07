@@ -1,0 +1,59 @@
+<body>
+
+  <div>
+    <span class="divLogo"><img src="../../../assets/mnsLogo-removebg-preview.png" id="logoMns"></span>
+  </div>
+
+  <div class="divTestTop"> <span id="span">LOC MNS</span></div>
+
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh">
+
+    <div class="container">
+      <form class="elements" [formGroup]="formulaire" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+          <div>
+            <input matInput type="text" formControlName="mail" (keyup)="erreurLogin=false" placeholder="E-mail" />
+          </div>
+          <mat-error *ngIf="formulaire.get('mail')?.hasError('email')">Email invalid</mat-error>
+          <mat-error *ngIf="formulaire.get('mail')?.hasError('required')">Email obligatoire</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <div>
+            <input matInput type="password" formControlName="password" (keyup)="erreurLogin=false"
+              placeholder="Password" />
+
+          </div>
+          <mat-error *ngIf="formulaire.get('password')?.hasError('required')">Mot de passe obligatoire</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="erreurLogin">Mauvais login / mot de passe</mat-error>
+
+
+
+        <div class="button-container">
+          <button type="submit" class="custom-button">Connexion<span class="material-symbols-outlined">
+              arrow_right_alt
+            </span></button>
+        </div>
+
+        <div class="divAsking">
+          <div>
+            <a href="#">Mot de passe oublié</a>
+          </div>
+          <div>
+            <a href="#"> Demander un compte </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <div id="animationFooter" class="footer-animation">
+    <span id="spanFooter"><img src="../../../assets/logoPimento.png"></span> &copy; Copyright Habanero <span
+      style="color: orange;">|</span> Tous droits réservés <span style="color: orange;">|</span> Réalisation Hoerner T
+    <span style="color: rgb(33, 104, 33);">&</span> Trichot R
+  </div>
+</footer>

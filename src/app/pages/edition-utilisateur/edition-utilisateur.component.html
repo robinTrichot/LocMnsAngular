@@ -1,0 +1,121 @@
+<div id="edition_utilisateur">
+
+  <a mat-raised-button routerLink="/administration/modif-ajout-utilisateur" color="primary" *ngIf="isAdmin">
+    <mat-icon>add</mat-icon>
+    Ajouter un utilisateur
+  </a>
+
+  <div class="search-container" style="text-align: right;">
+    <input type="text" [(ngModel)]="search" placeholder="Rechercher" (input)="updateSearchResults()" class="search">
+  </div>
+
+  <div class="divTable scrollable-table">
+
+    <table mat-table [dataSource]="UsersList" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="login">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.login}} </td>
+      </ng-container>
+
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="nomImageProfil">
+        <th mat-header-cell *matHeaderCellDef> Photo </th>
+        <td mat-cell *matCellDef="let utilisateur"> <img mat-card-image [attr.src]="utilisateur.imageProfil" /> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.lastname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef> Prénom </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.firstname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Tél. </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cellPhone">
+        <th mat-header-cell *matHeaderCellDef> Portable </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.cellPhone}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="mail">
+        <th mat-header-cell *matHeaderCellDef> mail </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.mail}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="streetNumber">
+        <th mat-header-cell *matHeaderCellDef> streetNumber </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.streetNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nameStreet">
+        <th mat-header-cell *matHeaderCellDef> nameStreet </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.nameStreet}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="postalCode">
+        <th mat-header-cell *matHeaderCellDef> postalCode </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.postalCode}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> city </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.city}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> role </th>
+        <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.role.role}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let utilisateur">
+          <mat-card>
+            <mat-card-actions>
+
+              <a *ngIf="isAdmin" [routerLink]="['/administration/modif-ajout-utilisateur', utilisateur.id]"
+                mat-raised-button color="primary" class="mr-2">
+                <mat-icon fontIcon="edit"></mat-icon>
+                Modifier
+              </a>
+
+              <span *ngIf="isAdmin && utilisateur.id == 1; else alternative">
+                Admin
+              </span>
+              <ng-template #alternative>
+                <button (click)="onDeleteUser(utilisateur.id)" mat-raised-button color="warn">
+                  <mat-icon fontIcon="delete"></mat-icon>
+                  Supprimer
+                </button>
+              </ng-template>
+            </mat-card-actions>
+          </mat-card>
+
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+
+
+</div>

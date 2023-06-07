@@ -1,0 +1,48 @@
+<div>
+    <span>Vos réservations en attente : </span>
+    <table *ngFor="let hire of listHires">
+        <ng-container *ngIf="hire.status == 'en attente'">
+            <thead>
+                <tr>
+                    <th>Matériel</th>
+                    <th>Date de début</th>
+                    <th>Date de fin </th>
+                    <th>status </th>
+                    <th>Localisation </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <td> 1 </td>
+                <td> {{hire.dateHire}} </td>
+                <td> {{hire.datePlannedReturn}} </td>
+                <td> {{hire.status}} </td>
+                <td> {{hire.eventHire.nameEvent}} </td>
+            </tbody>
+        </ng-container>
+    </table>
+</div>
+
+<div>
+    <span>Vos réservations en cours: </span>
+    <table *ngFor="let hire of  listHires">
+        <ng-container *ngIf="hire.status == 'en cours'">
+            <thead>
+                <tr>
+                    <th>Matériel</th>
+                    <th>Date de début </th>
+                    <th>Date de fin </th>
+                    <th>status </th>
+                    <th>Localisation </th>
+                </tr>
+            </thead>
+            <tbody>
+                <td> {{hire.copy.material.wording}} </td>
+                <td> {{hire.dateHire}} </td>
+                <td> {{hire.datePlannedReturn}} </td>
+                <td> {{hire.status}} </td>
+                <td> {{hire.eventHire.nameEvent}} </td>
+            </tbody>
+        </ng-container>
+    </table>
+</div>

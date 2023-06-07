@@ -1,0 +1,227 @@
+<mat-form-field>
+  <mat-label>Matériel à louer</mat-label>
+  <mat-select [(value)]="selectedMaterial">
+    <span *ngFor="let material of listeMaterials">
+      <mat-option value="{{material.wording}}">{{material.wording}}</mat-option>
+    </span>
+  </mat-select>
+</mat-form-field>
+
+<mat-radio-group aria-label="Select an option" [(ngModel)]="ngModelSelected">
+  <form [formGroup]="formHire" (ngSubmit)="onFormSubmit()">
+
+    <ng-container *ngIf="selectedMaterial">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Date d'achat</th>
+            <th>Matériel</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <ng-container *ngFor="let copie of listeCopies">
+            <ng-container *ngIf="copie.material.wording == selectedMaterial">
+              <ng-container *ngIf="copie.status == 'free'">
+
+                <tr style="background-color: teal;">
+                  <td>
+                    {{copie.id}}
+                  </td>
+                  <td>{{copie.datePurchase}}</td>
+                  <td>{{copie.material.wording}}</td>
+
+                  <td>
+                    <mat-radio-button [value]="copie">Louer</mat-radio-button>
+                  </td>
+                </tr>
+
+              </ng-container>
+
+
+              <ng-container *ngIf="copie.status == 'hired'">
+                <tr style="background-color: rgb(33, 160, 160);">
+                  <td>{{copie.id}}</td>
+                  <td>{{copie.datePurchase}}</td>
+                  <td>{{copie.material.wording}}</td>
+                  <td>Indisponible</td>
+                </tr>
+
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <td style="background-color: rgb(33, 160, 160);"><mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="pickerDebut" formControlName="pickerDebutController"
+                (dateChange)="onDateSelected($event)">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+              <mat-datepicker #pickerDebut></mat-datepicker>
+            </mat-form-field></td>
+
+          <td style="background-color: rgb(33, 160, 160);"><mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="pickerFin" formControlName="pickerFinController"
+                (dateChange)="onDateFinSelected($event)">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFin></mat-datepicker>
+            </mat-form-field></td>
+
+          <td style="background-color: rgb(33, 160, 160);">
+            <mat-form-field>
+              <mat-label>Choisiez un lieu</mat-label>
+              <mat-select [(value)]="selectedEventHire" name="eventHireSelection">
+                <mat-option *ngFor="let eventHire of listeEventHires" [value]="eventHire">
+                  {{eventHire.nameEvent}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td style="background-color: rgb(33, 160, 160);">
+            <button type="submit">Louer</button>
+          </td>
+
+        </tbody>
+
+      </table>
+    </ng-container>
+  </form>
+</mat-radio-group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- table ci dessous -->
+
+<!-- <ng-container *ngIf="selectedMaterial">
+  <table mat-table class="mat-elevation-z8" [dataSource]="dataCopy">
+    <form [formGroup]="formHire" (ngSubmit)="onFormSubmit()">
+
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+              <span #copieId>{{copie.id}}</span>
+            </td>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+
+      <ng-container matColumnDef="materiel">
+        <th mat-header-cell *matHeaderCellDef> Matériel </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+
+
+              <span>{{copie.material.wording}}</span>
+            </td>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="dateDeDepart">
+        <th mat-header-cell *matHeaderCellDef> Date de début </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="pickerDebut" formControlName="pickerDebutController"
+                  (dateChange)="onDateSelected($event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDebut></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+
+      <ng-container matColumnDef="dateDeRetour">
+        <th mat-header-cell *matHeaderCellDef> date de retour </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="pickerFin" formControlName="pickerFinController"
+                  (dateChange)="onDateFinSelected($event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFin></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+
+              <span>{{copie.status}}</span>
+            </td>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+
+      <ng-container matColumnDef="louer">
+        <th mat-header-cell *matHeaderCellDef> Louer </th>
+        <ng-container *matCellDef="let copie">
+          <ng-container *ngIf="copie.material.wording == selectedMaterial">
+            <td [ngStyle]="{'background-color': copie.status === 'free' ? 'teal' : 'rgb(163, 193, 193)'}">
+
+              <mat-card>
+                <mat-card-actions>
+                  <span *ngIf=" copie.status == 'hired'; else alternative">
+                    Indisponible
+                  </span>
+                  <ng-template #alternative>
+                    <button mat-raised-button (click)="onFormSubmit()" type="submit">
+                      <mat-icon fontIcon="edit"></mat-icon>
+                      Louer
+                    </button>
+                  </ng-template>
+                </mat-card-actions>
+              </mat-card>
+            </td>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </form>
+  </table>
+</ng-container> -->

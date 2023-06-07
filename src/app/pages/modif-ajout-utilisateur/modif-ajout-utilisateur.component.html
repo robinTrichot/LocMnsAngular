@@ -1,0 +1,169 @@
+<ng-container [ngSwitch]="codeRetour">
+  <form *ngSwitchDefault class="container" (ngSubmit)="onSubmit()" [formGroup]="formulaire">
+
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="mail" />
+
+      <mat-error *ngIf="formulaire.get('mail')?.hasError('mail')">
+        Email invalid
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('mail')?.hasError('required')">
+        Email obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>Login</mat-label>
+      <input matInput formControlName="login" />
+      <mat-error> Login obligatoire </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>password</mat-label>
+      <input matInput formControlName="password" />
+      <mat-error *ngIf="formulaire.get('password')?.hasError('required')">
+        password obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>lastname</mat-label>
+      <input matInput formControlName="lastname" />
+      <mat-error *ngIf="formulaire.get('lastname')?.hasError('required')">
+        lastname obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>firstname</mat-label>
+      <input matInput formControlName="firstname" />
+      <mat-error *ngIf="formulaire.get('firstname')?.hasError('required')">
+        firstname obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>phone</mat-label>
+      <input matInput formControlName="phone" />
+      <mat-error *ngIf="formulaire.get('phone')?.hasError('required')">
+        phone obligatoire
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('phone')?.hasError('integer')">
+        Veuillez entrer un numero de téléphone dans ce champ
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>cellPhone</mat-label>
+      <input matInput formControlName="cellPhone" />
+      <mat-error *ngIf="formulaire.get('cellPhone')?.hasError('required')">
+        cellPhone obligatoire
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('cellPhone')?.hasError('integer')">
+        Il faut un nombre
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>streetNumber</mat-label>
+      <input matInput formControlName="streetNumber" />
+      <mat-error *ngIf="formulaire.get('streetNumber')?.hasError('required')">
+        streetNumber obligatoire
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('streetNumber')?.hasError('integer')">
+        Il faut un nombre
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>nameStreet</mat-label>
+      <input matInput formControlName="nameStreet" />
+      <mat-error *ngIf="formulaire.get('nameStreet')?.hasError('required')">
+        nameStreet obligatoire
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('nameStreet')?.hasError('noInteger')">
+        Veuillez ne pas entrer de valeur numérique dans ce champ.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>postalCode</mat-label>
+      <input matInput formControlName="postalCode" />
+      <mat-error *ngIf="formulaire.get('postalCode')?.hasError('required')">
+        postalCode obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>city</mat-label>
+      <input matInput formControlName="city" />
+      <mat-error *ngIf="formulaire.get('city')?.hasError('required')">
+        city obligatoire
+      </mat-error>
+      <mat-error *ngIf="formulaire.get('city')?.hasError('noInteger')">
+        Veuillez ne pas entrer de valeur numérique dans ce champ.
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>role</mat-label>
+      <mat-select formControlName="role" [compareWith]="compareRole">
+
+
+        <mat-option *ngFor="let role of listeRole" [value]="role"> {{role.wording}} </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formulaire.get('role')?.hasError('required')">
+        Un role doit être choisi
+      </mat-error>
+    </mat-form-field>
+
+
+
+
+
+    <div>
+      <input #fileSelector type="file" style="display: none;" (change)="onImageSelectionnee($event)">
+      <button mat-mini-fab type="button" color="primary" (click)="fileSelector.click()">
+        <mat-icon>
+          <span class="material-symbols-outlined">
+            attach_file_add
+          </span>
+        </mat-icon>
+      </button>
+      <span>{{fichier != null ? fichier.name : " Aucun fichier sélectionné"}}</span>
+    </div>
+
+    <div class="action-buttons">
+      <button mat-raised-button type="submit" color="primary">
+        {{ idUtilisateur == null ? "Ajouter" : "Modifier" }}
+      </button>
+      <a routerLink="/administration/edition-utilisateur" routerLink="/administration/edition-utilisateur"
+        mat-raised-button color="warn">Annuler</a>
+    </div>
+  </form>
+
+  <div *ngSwitchCase="404">
+    <h2>Cet utilisateur n'existe pas (il a peut être été supprimé)</h2>
+    <a mat-raised-button color="primary" routerLink="/administration/edition-utilisateur">
+      Retour à l'édition
+    </a>
+  </div>
+
+  <div *ngSwitchCase="500">
+    <h2>Erreur inconnue</h2>
+
+    <p>Contacter l'admnistrateur en lui communiquant cette erreur</p>
+    <pre>
+    {{ messageErreur }}
+  </pre>
+
+    <a mat-raised-button color="warn"> Envoyer un rapport d'erreur </a>
+
+    <a mat-raised-button color="primary" routerLink="/accueil-admin">
+      Retour à l'accueil
+    </a>
+  </div>
+</ng-container>
