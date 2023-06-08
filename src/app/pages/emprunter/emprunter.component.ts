@@ -7,7 +7,7 @@ import { Material } from 'src/models/material';
 import { MaterialService } from 'src/app/services/material.service';
 import { Hire } from 'src/models/hire';
 import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { HireService } from 'src/app/services/hire.service';
 import { formatDate } from '@angular/common';
 import { UsagerServiceService } from 'src/app/services/usager-service.service';
@@ -37,6 +37,7 @@ export class EmprunterComponent {
   selectedDateDFin: Date | null = null;
   returnCopie?: Copy;
 
+  dateInvalid: boolean = false;
 
   // à refaire les dcoluns pour la sécurité 
   displayedColumns: string[] = ['id', 'materiel', 'dateDeDepart', 'dateDeRetour', 'status', 'louer'];
@@ -73,8 +74,8 @@ export class EmprunterComponent {
   formHire = this.formBuilder.group({
     pickerDebutController: ['', Validators.required],
     pickerFinController: ['', Validators.required],
+  }, { validator: this.dateDebutInfDateFinValidator });
 
-  })
 
   onDeconnexion() {
     this.connexionService.deconnexion();
@@ -84,9 +85,7 @@ export class EmprunterComponent {
     this.copieService.getCopies();
   }
 
-  // getIdCopie(copy: Copy) {
-  //   this.returnCopie = copy;
-  // }
+
 
   public toggleTable(): void {
     //this.showTable = !this.showTable;
@@ -107,7 +106,6 @@ export class EmprunterComponent {
       const hire: Hire = this.formHire.value as Hire;
       hire.dateHire = dateDebut;
       hire.datePlannedReturn = dateFin;
-
 
       hire.copy = this.ngModelSelected!;
 
@@ -135,12 +133,33 @@ export class EmprunterComponent {
 
       // une fois le formulaire validé, l'utilisateur est renvoyé vers la page de ses réservations
       if (this.formHire.valid) {
+        this.dateInvalid = false;
         this.hireService.passerCommande(hire).subscribe((resultat) => this.router.navigateByUrl('accueil/mes-reservations'));
       } else {
+        this.dateInvalid = true;
         console.log("Invalid date values");
       }
     }
   }
+
+
+  dateDebutInfDateFinValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const pickerDebut = control.get('pickerDebutController');
+    const pickerFin = control.get('pickerFinController');
+
+    if (pickerDebut && pickerFin && pickerDebut.value && pickerFin.value) {
+      const dateDebut = new Date(pickerDebut.value);
+      const dateFin = new Date(pickerFin.value);
+
+      if (dateDebut > dateFin) {
+
+        return { 'dateInvalid': true };
+      }
+    }
+
+    return null;
+  }
+
 }
 
 

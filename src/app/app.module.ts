@@ -33,7 +33,9 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { MatRadioModule } from '@angular/material/radio';
 import { GestionLocationsComponent } from './pages/gestion-locations/gestion-locations.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { GestionLocationPopUpComponent } from './popups/gestion-location-pop-up/gestion-location-pop-up.component';
+import { CommonModule } from '@angular/common';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -51,8 +53,7 @@ registerLocaleData(localeFr);
     PanneComponent,
     AdministrationComponent,
     DatePipe,
-    GestionLocationsComponent,
-
+    GestionLocationPopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +72,9 @@ registerLocaleData(localeFr);
     MatMomentDateModule,
     FormsModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule,
+    CommonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

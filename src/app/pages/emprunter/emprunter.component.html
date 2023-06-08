@@ -1,11 +1,21 @@
-<mat-form-field>
-  <mat-label>Matériel à louer</mat-label>
-  <mat-select [(value)]="selectedMaterial">
-    <span *ngFor="let material of listeMaterials">
-      <mat-option value="{{material.wording}}">{{material.wording}}</mat-option>
-    </span>
-  </mat-select>
-</mat-form-field>
+<div class="divTop">
+  <div>
+    <mat-form-field>
+      <mat-label>Matériel à louer</mat-label>
+      <mat-select [(value)]="selectedMaterial">
+        <span *ngFor="let material of listeMaterials">
+          <mat-option value="{{material.wording}}">{{material.wording}}</mat-option>
+        </span>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="divTop_divRight">
+    <ng-container *ngIf="dateInvalid">
+      <span class="alertDateInvalid"> Votre date de fin doit être supérieure à votre date de départ</span>
+    </ng-container>
+  </div>
+</div>
 
 <mat-radio-group aria-label="Select an option" [(ngModel)]="ngModelSelected">
   <form [formGroup]="formHire" (ngSubmit)="onFormSubmit()">

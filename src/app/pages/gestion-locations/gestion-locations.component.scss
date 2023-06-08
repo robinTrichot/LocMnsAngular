@@ -1,0 +1,30 @@
+th,
+td {
+    border: 1px solid #FF5B2F;
+    padding: 8px;
+    text-align: center;
+}
+
+img {
+    width: 70px;
+    height: 80px;
+}
+
+
+.divTable {
+    width: 100%;
+    height: 70vh;
+}
+
+button {
+    margin: 5px;
+    width: 20%;
+}
+
+.equal-width-table {
+    width: 70%;
+    table-layout: fixed;
+}
+
+
+

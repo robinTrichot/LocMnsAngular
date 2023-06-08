@@ -18,3 +18,17 @@ table {
 
 }
 
+.divTop {
+    display: flex;
+
+    .divTop_divRight {
+        margin-left: 10px;
+        display: flex;
+        justify-content: center; // Centrer le contenu horizontalement
+        align-items: center; // Centrer le contenu verticalement
+    }
+}
+
+.alertDateInvalid {
+    color: red;
+}
