@@ -1,1 +1,56 @@
-<p>gestion-locations works!</p>
+<div>
+    <span>Les réservations en attente : </span>
+    <table *ngFor="let hire of listeHires" class="equal-width-table">
+        <ng-container *ngIf="hire.status == 'en attente'">
+            <thead>
+                <tr>
+                    <th>Emprenteur</th>
+                    <th>Matériel</th>
+                    <th>Date de début</th>
+                    <th>Date de fin </th>
+                    <th>status </th>
+                    <th>Localisation </th>
+                    <th>Validation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td> {{hire.user.mail}} {{hire.user.firstname}} {{hire.user.lastname}}</td>
+                <td> {{hire.copy.material.wording}} </td>
+                <td> {{hire.dateHire}} </td>
+                <td> {{hire.datePlannedReturn}} </td>
+                <td> {{hire.status}} </td>
+                <td class="localisationTd"> {{hire.eventHire.nameEvent}} </td>
+                <td>
+                    <button mat-raised-button color="primary" (click)="openDialog('0ms', '0ms', hire)">Valider</button>
+                    <button mat-raised-button color="warn">Refuser</button>
+                </td>
+            </tbody>
+        </ng-container>
+    </table>
+</div>
+
+<div>
+    <span>Les reservations en cours : </span>
+    <table *ngFor="let hire of  listeHires" class="equal-width-table">
+        <ng-container *ngIf="hire.status == 'en cours'">
+            <thead>
+                <tr>
+                    <th>Emprenteur</th>
+                    <th>Matériel</th>
+                    <th>Date de début </th>
+                    <th>Date de fin </th>
+                    <th>status </th>
+                    <th>Localisation </th>
+                </tr>
+            </thead>
+            <tbody>
+                <td> {{hire.user.mail}} {{hire.user.firstname}} {{hire.user.lastname}}</td>
+                <td> {{hire.copy.material.wording}} </td>
+                <td> {{hire.dateHire}} </td>
+                <td> {{hire.datePlannedReturn}} </td>
+                <td> {{hire.status}} </td>
+                <td class="localisationTd"> {{hire.eventHire.nameEvent}} </td>
+            </tbody>
+        </ng-container>
+    </table>
+</div>
