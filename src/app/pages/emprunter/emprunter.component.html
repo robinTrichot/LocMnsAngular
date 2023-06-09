@@ -12,13 +12,15 @@
 
   <div class="divTop_divRight">
     <ng-container *ngIf="dateInvalid">
-      <span class="alertDateInvalid"> Votre date de fin doit être supérieure à votre date de départ</span>
+      <span class="alertDateInvalid"> Votre date de fin doit être supérieure à votre date de départ et ne pas dépasser
+        <span class="nine">neuf</span> mois.</span>
     </ng-container>
   </div>
 </div>
 
-<mat-radio-group aria-label="Select an option" [(ngModel)]="ngModelSelected">
-  <form [formGroup]="formHire" (ngSubmit)="onFormSubmit()">
+
+<form [formGroup]="formHire" (ngSubmit)="onFormSubmit()">
+  <mat-radio-group aria-label="Select an option" formControlName="radioSelected">
 
     <ng-container *ngIf="selectedMaterial">
       <table>
@@ -27,7 +29,11 @@
             <th>No.</th>
             <th>Date d'achat</th>
             <th>Matériel</th>
-            <th></th>
+            <th>Caractéristiques</th>
+            <th>
+              <!-- <mat-error *ngIf="formHire.get('radioSelected')?.hasError('required')">hohoho erreur</mat-error> -->
+              <span *ngIf="selectedCopy" style="color : red">Champs requis</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +48,7 @@
                   </td>
                   <td>{{copie.datePurchase}}</td>
                   <td>{{copie.material.wording}}</td>
-
+                  <td>{{copie.features.wording}}</td>
                   <td>
                     <mat-radio-button [value]="copie">Louer</mat-radio-button>
                   </td>
@@ -56,13 +62,14 @@
                   <td>{{copie.id}}</td>
                   <td>{{copie.datePurchase}}</td>
                   <td>{{copie.material.wording}}</td>
+                  <td>{{copie.features.wording}}</td>
                   <td>Indisponible</td>
                 </tr>
 
               </ng-container>
             </ng-container>
           </ng-container>
-          <td style="background-color: rgb(33, 160, 160);"><mat-form-field>
+          <td style="background-color: rgb(64, 133, 133);"><mat-form-field>
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="pickerDebut" formControlName="pickerDebutController"
                 (dateChange)="onDateSelected($event)">
@@ -71,7 +78,7 @@
               <mat-datepicker #pickerDebut></mat-datepicker>
             </mat-form-field></td>
 
-          <td style="background-color: rgb(33, 160, 160);"><mat-form-field>
+          <td style="background-color: rgb(64, 133, 133);"><mat-form-field>
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="pickerFin" formControlName="pickerFinController"
                 (dateChange)="onDateFinSelected($event)">
@@ -80,18 +87,18 @@
               <mat-datepicker #pickerFin></mat-datepicker>
             </mat-form-field></td>
 
-          <td style="background-color: rgb(33, 160, 160);">
+          <td style="background-color: rgb(64, 133, 133);">
             <mat-form-field>
               <mat-label>Choisiez un lieu</mat-label>
-              <mat-select [(value)]="selectedEventHire" name="eventHireSelection">
+              <mat-select [(value)]="selectedEventHire" name="eventHireSelection" formControlName="locationSelected">
                 <mat-option *ngFor="let eventHire of listeEventHires" [value]="eventHire">
                   {{eventHire.nameEvent}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </td>
-
-          <td style="background-color: rgb(33, 160, 160);">
+          <td style="background-color: rgb(64, 133, 133);"></td>
+          <td style="background-color: rgb(64, 133, 133);">
             <button type="submit">Louer</button>
           </td>
 
@@ -99,8 +106,8 @@
 
       </table>
     </ng-container>
-  </form>
-</mat-radio-group>
+  </mat-radio-group>
+</form>
 
 
 

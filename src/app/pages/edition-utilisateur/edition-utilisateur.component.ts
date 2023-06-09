@@ -39,9 +39,6 @@ export class EditionUtilisateurComponent {
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur));
 
-
-    console.log(this.utilisateurConnecte);
-
     this.raffraichir();
 
   }

@@ -27,7 +27,7 @@ export class ModifAjoutUtilisateurComponent {
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
     login: ['', [Validators.required, Validators.minLength(3)]],
- //   password: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     lastname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
     firstname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
     phone: ['', [Validators.required, this.integerValidator]],
