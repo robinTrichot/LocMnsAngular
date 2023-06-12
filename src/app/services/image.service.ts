@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Material } from 'src/models/material';
 import { Usager } from 'src/models/usager';
 
 @Injectable({
@@ -31,23 +32,15 @@ export class ImageService {
     }
   }
 
-
-
-
-  // pour thibaut (back material):
-
-
-//   chargementPicture(material: Material) {
-//     if (material.pictureName != null) {
-//       this.http
-//         .get('http://localhost:8080/picture-material/' + material.id, { responseType: 'blob' })
-//         .subscribe((donneePicture: any) => {
-//           material.picture = this.sanitizer.bypassSecurityTrustUrl(
-//             URL.createObjectURL(donneePicture)
-//           );
-//         });
-//     }
-//   }
-// }
-
+  chargementPicture(material: Material) {
+    if (material.pictureName != null) {
+      this.http
+        .get('http://localhost:8080/user/picture-material/' + material.id, { responseType: 'blob' })
+        .subscribe((donneePicture: any) => {
+          material.picture = this.sanitizer.bypassSecurityTrustUrl(
+            URL.createObjectURL(donneePicture)
+          );
+        });
+    }
+  }
 }

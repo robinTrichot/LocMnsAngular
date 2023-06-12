@@ -13,7 +13,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 export class EditionUtilisateurComponent {
 
   utilisateurConnecte: Usager | null = null;
-  UsersList: Usager[] = [];
+  usersList: Usager[] = [];
 
   displayedColumns: string[] = ['id', 'login', 'nomImageProfil', 'lastname',
     'firstname', 'phone', 'cellPhone', 'mail', 'streetNumber', 'nameStreet', 'postalCode', 'city', 'role', 'Edit'];
@@ -24,7 +24,6 @@ export class EditionUtilisateurComponent {
   constructor(
     private usagerService: UsagerServiceService,
     private connexionService: ConnexionService,
-    private serviceUtilisateur: UsagerServiceService,
     private imageCompress: NgxImageCompressService,
   ) { }
 
@@ -34,7 +33,7 @@ export class EditionUtilisateurComponent {
         this.isAdmin = utilisateur?.role.role == "ROLE_ADMIN"));
 
     this.usagerService._utilisateurs.subscribe(
-      (utilisateurs) => (this.UsersList = utilisateurs));
+      (utilisateurs) => (this.usersList = utilisateurs));
 
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur));
@@ -55,7 +54,7 @@ export class EditionUtilisateurComponent {
 
   onDeleteUser(idUtilisateur: number | undefined) {
     if (idUtilisateur != undefined) {
-      this.serviceUtilisateur
+      this.usagerService
         .deleteUtilisateur(idUtilisateur)
         .subscribe(
           (utilisateur) => {
@@ -72,7 +71,7 @@ export class EditionUtilisateurComponent {
     if (this.search !== '') {
       const searchLowerCase = this.search.toLowerCase();
 
-      const filteredUsers = this.UsersList.filter((utilisateur) => {
+      const filteredUsers = this.usersList.filter((utilisateur) => {
         return (
           (utilisateur.id?.toString().toLowerCase().includes(searchLowerCase) ?? false) ||
           (utilisateur.login?.toLowerCase().includes(searchLowerCase) ?? false) ||
@@ -89,7 +88,7 @@ export class EditionUtilisateurComponent {
         );
       });
 
-      this.UsersList = filteredUsers;
+      this.usersList = filteredUsers;
     } else {
       // Si le champ de recherche est vide, réinitialiser le tableau avec les données d'origine
       this.raffraichir();

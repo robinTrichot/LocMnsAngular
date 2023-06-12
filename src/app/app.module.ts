@@ -37,6 +37,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { GestionLocationPopUpComponent } from './popups/gestion-location-pop-up/gestion-location-pop-up.component';
 import { CommonModule } from '@angular/common';
 
+import { GestionMaterielsComponent } from './pages/gestion-materiels/gestion-materiels.component';
+import { FormulaireMaterielsComponent } from './pages/formulaire-materiels/formulaire-materiels.component';
+
+
 
 registerLocaleData(localeFr);
 
@@ -56,6 +60,8 @@ registerLocaleData(localeFr);
     AdministrationComponent,
     DatePipe,
     GestionLocationPopUpComponent,
+    GestionMaterielsComponent,
+    FormulaireMaterielsComponent,
   ],
   imports: [
     BrowserModule,

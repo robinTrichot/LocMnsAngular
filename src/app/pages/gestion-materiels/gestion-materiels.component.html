@@ -1,0 +1,88 @@
+<div id="gestion_materiel">
+
+    <a mat-raised-button routerLink="/administration/formulaire-materiels" color="primary" *ngIf="isAdmin">
+        <mat-icon>add</mat-icon>
+        Ajouter un matériel
+    </a>
+
+    <div class="search-container" style="text-align: right;">
+        <input type="text" [(ngModel)]="search" placeholder="Rechercher" (input)="updateSearchMaterial()"
+            class="search">
+    </div>
+
+    <div class="divTable scrollable-table">
+
+        <table mat-table [dataSource]="materialsList" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let material"> {{material.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="wording">
+                <th mat-header-cell *matHeaderCellDef> Nom </th>
+                <td mat-cell *matCellDef="let material"> {{material.wording}} </td>
+            </ng-container>
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="pictureName">
+                <th mat-header-cell *matHeaderCellDef> Photo </th>
+                <td mat-cell *matCellDef="let material"> <img mat-card-image [attr.src]="material.picture" />
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="notice">
+                <th mat-header-cell *matHeaderCellDef> Notice </th>
+                <td mat-cell *matCellDef="let material"> {{material.notice}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="trademarkMaterial">
+                <th mat-header-cell *matHeaderCellDef> Marque </th>
+                <td mat-cell *matCellDef="let material"> {{ material.trademarkMaterial.wording }} </td>
+            </ng-container>
+
+
+            <!--  Affichage des caractéristiques après création features
+                                                <ng-container matColumnDef="features">
+                                                    <th mat-header-cell *matHeaderCellDef> Caractéristiques </th>
+                                                    <td mat-cell *matCellDef="let material"> {{material.features.wording}} </td>
+                                                </ng-container> -->
+
+
+            <ng-container matColumnDef="Edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let material">
+                    <mat-card>
+                        <mat-card-actions>
+
+                            <a *ngIf="isAdmin" [routerLink]="['/administration/formulaire-materiels', material.id]"
+                                mat-raised-button color="primary" class="mr-2">
+                                <mat-icon fontIcon="edit"></mat-icon>
+                                Modifier
+                            </a>
+
+
+                            <button (click)="onDeleteMaterial(material.id)" mat-raised-button color="warn">
+                                <mat-icon fontIcon="delete"></mat-icon>
+                                Supprimer
+                            </button>
+
+                        </mat-card-actions>
+                    </mat-card>
+
+
+                </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </div>
+
+
+</div>
