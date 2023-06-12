@@ -1,0 +1,70 @@
+<ng-container [ngSwitch]="codeRetour">
+    <form *ngSwitchDefault class="container" (ngSubmit)="onSubmit()" [formGroup]="formulaire">
+ 
+        <mat-form-field appearance="fill" class="form-field-spacing">
+            <mat-label>nom</mat-label>
+            <input matInput formControlName="wording" />
+            <mat-error *ngIf="formulaire.get('wording')?.hasError('required')">
+                nom obligatoire
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field-spacing">
+            <mat-label>marque</mat-label>
+            <mat-select formControlName="trademarkMaterial" [compareWith]="compareTrademark">
+
+
+                <mat-option *ngFor="let trademark of listTrademarks" [value]="trademark"> {{trademark.wording}} </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formulaire.get('trademarkMaterial')?.hasError('required')">
+                Une marque doit être choisie
+            </mat-error>
+        </mat-form-field>
+
+
+
+
+
+        <div>
+            <input #fileSelector type="file" style="display: none;" (change)="onImageSelectionnee($event)">
+            <button mat-mini-fab type="button" color="primary" (click)="fileSelector.click()">
+                <mat-icon>
+                    <span class="material-symbols-outlined">
+                        attach_file_add
+                    </span>
+                </mat-icon>
+            </button>
+            <span>{{fichier != null ? fichier.name : " Aucun fichier sélectionné"}}</span>
+        </div>
+
+        <div class="action-buttons">
+            <button mat-raised-button type="submit" color="primary">
+                {{ idMaterial == null ? "Ajouter" : "Modifier" }}
+            </button>
+            <a routerLink="/administration/gestion-materiels" routerLink="/administration/gestion-materiels"
+                mat-raised-button color="warn">Annuler</a>
+        </div>
+    </form>
+
+    <div *ngSwitchCase="404">
+        <h2>Ce matériel n'existe pas (il a peut être été supprimé)</h2>
+        <a mat-raised-button color="primary" routerLink="/administration/gestion-materiels">
+            Retour à l'édition
+        </a>
+    </div>
+
+    <div *ngSwitchCase="500">
+        <h2>Erreur inconnue</h2>
+
+        <p>Contacter l'admnistrateur en lui communiquant cette erreur</p>
+        <pre>
+    {{ messageErreur }}
+  </pre>
+
+        <a mat-raised-button color="warn"> Envoyer un rapport d'erreur </a>
+
+        <a mat-raised-button color="primary" routerLink="/accueil-admin">
+            Retour à l'accueil
+        </a>
+    </div>
+</ng-container>

@@ -66,13 +66,13 @@
                     Gestion des utilisateurs
                 </div>
                 <div class="my-2 flex-fill d-flex align-items-center justify-content-center orange-border"
-                    *ngIf="utilisateurConnecte != null">Gestion des matériels</div>
+                    *ngIf="utilisateurConnecte != null" routerLink="gestion-materiels">Gestion des matériels</div>
                 <div class="my-2 flex-fill d-flex align-items-center justify-content-center orange-border"
                     *ngIf="utilisateurConnecte != null" routerLink="gestion-locations">Gestion des locations</div>
                 <div class="my-2 flex-fill d-flex align-items-center justify-content-center orange-border"
                     *ngIf="utilisateurConnecte != null">Gestion des réparations</div>
                 <div class="my-2 flex-fill d-flex align-items-center justify-content-center orange-border"
-                    *ngIf="utilisateurConnecte != null">Statistiques</div>
+                    *ngIf="utilisateurConnecte != null" routerLink="statistiques">Statistiques</div>
             </div>
         </div>
 

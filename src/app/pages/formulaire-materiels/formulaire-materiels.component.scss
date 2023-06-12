@@ -1,0 +1,33 @@
+mat-form-field {
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+form {
+
+    justify-content: center;
+    align-items: center;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    margin-top: 20px;
+
+}
+
+.action-buttons button,
+.action-buttons a {
+    width: 100px;
+    margin-right: 40px;
+}
+
+.form-field-spacing {
+    margin-right: 40px;
+    /* Espacement entre les champs de formulaire */
+}

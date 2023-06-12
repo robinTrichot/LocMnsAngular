@@ -11,6 +11,6 @@ export class EventHireService {
   constructor(private http: HttpClient) { }
 
   public getEventHires(): Observable<EventHire[]> {
-    return this.http.get<EventHire[]>("http://localhost:8080/EventHire")
+    return this.http.get<EventHire[]>("http://localhost:8080/user/EventHire")
   }
 }

@@ -22,7 +22,7 @@ export class ConnexionService {
   connexion(utilisateur: Usager): Observable<string> {
     return this.http
       .post(
-        'http://localhost:8080/connexion', utilisateur, {
+        'http://localhost:8080/user/connexion', utilisateur, {
         responseType: 'text',
       })
   }

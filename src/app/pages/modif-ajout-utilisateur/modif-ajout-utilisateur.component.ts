@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { RoleService } from 'src/app/services/role.service';
@@ -27,7 +27,7 @@ export class ModifAjoutUtilisateurComponent {
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
     login: ['', [Validators.required, Validators.minLength(3)]],
- //   password: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     lastname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
     firstname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
     phone: ['', [Validators.required, this.integerValidator]],
@@ -70,7 +70,7 @@ export class ModifAjoutUtilisateurComponent {
           next: (utilisateur: Usager) => {
             this.formulaire.get('mail')?.setValue(utilisateur.mail); // le "?" ne pas oublier que ça renvoit soit un un truc soit un null, au cas c'est null on lui dit faire un truc en fait
             this.formulaire.get('login')?.setValue(utilisateur.login);
-         //   this.formulaire.get('password')?.setValue(utilisateur.password);
+            this.formulaire.get('password')?.setValue(utilisateur.password);
             this.formulaire.get('lastname')?.setValue(utilisateur.lastname);
             this.formulaire.get('firstname')?.setValue(utilisateur.firstname);
             this.formulaire.get('phone')?.setValue(utilisateur.phone);

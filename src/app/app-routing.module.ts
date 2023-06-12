@@ -10,6 +10,8 @@ import { EmprunterComponent } from './pages/emprunter/emprunter.component';
 import { MesReservationsComponent } from './pages/mes-reservations/mes-reservations.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { GestionLocationsComponent } from './pages/gestion-locations/gestion-locations.component';
+import { GestionMaterielsComponent } from './pages/gestion-materiels/gestion-materiels.component';
+import { FormulaireMaterielsComponent } from './pages/formulaire-materiels/formulaire-materiels.component';
 
 const routes: Routes = [
 
@@ -28,6 +30,9 @@ const routes: Routes = [
       { path: "modif-ajout-utilisateur/:id", component: ModifAjoutUtilisateurComponent, canActivate: [AdminGuard] },
       { path: "gestion-locations", component: GestionLocationsComponent, canActivate: [AdminGuard] },
       { path: "gestion-locations/:id", component: GestionLocationsComponent, canActivate: [AdminGuard] },
+      { path: "gestion-materiels", component: GestionMaterielsComponent, canActivate: [AdminGuard] },
+      { path: "formulaire-materiels", component: FormulaireMaterielsComponent, canActivate: [AdminGuard] },
+      { path: "formulaire-materiels/:id", component: FormulaireMaterielsComponent, canActivate: [AdminGuard] },
     ],
   },
   { path: "", redirectTo: "connexion", pathMatch: "full" },
