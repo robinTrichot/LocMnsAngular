@@ -11,11 +11,11 @@ export class HireService {
   constructor(private http: HttpClient) { }
 
   public passerCommande(hire: Hire): Observable<any> {
-    return this.http.post('http://localhost:8080/commande', hire);
+    return this.http.post('http://localhost:8080/user/commande', hire);
   }
 
   public getHireByUser(idUser: number): Observable<any> {
-    return this.http.get('http://localhost:8080/HireUser/' + idUser);
+    return this.http.get('http://localhost:8080/user/HireUser/' + idUser);
   }
 
   public getHires(): Observable<Hire[]> {

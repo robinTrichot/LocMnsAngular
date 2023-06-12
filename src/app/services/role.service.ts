@@ -11,6 +11,6 @@ export class RoleService {
   constructor(private http: HttpClient) { }
 
   public getRoles(): Observable<TypeUsager[]> {
-    return this.http.get<TypeUsager[]>("http://localhost:8080/TypeUsagers")
+    return this.http.get<TypeUsager[]>("http://localhost:8080/user/TypeUsagers")
   }
 }

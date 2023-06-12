@@ -14,8 +14,8 @@ export class ConnexionComponent {
 
 
   formulaire: FormGroup = this.formBuilder.group({
-    mail: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+    password: ['', [Validators.required, Validators.maxLength(50)]],
   });
 
   erreurLogin = false;

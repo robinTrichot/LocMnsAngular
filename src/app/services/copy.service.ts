@@ -13,15 +13,15 @@ export class CopyService {
   constructor(private http: HttpClient) { }
 
   public getCopies(): Observable<Copy[]> {
-    return this.http.get<Copy[]>("http://localhost:8080/copies")
+    return this.http.get<Copy[]>("http://localhost:8080/user/copies")
   }
 
   public getCopie(id: number): Observable<Copy> {
-    return this.http.get<Copy>("http://localhost:8080/copie/" + id)
+    return this.http.get<Copy>("http://localhost:8080/user/copie/" + id)
   }
 
   public changeStatusCopy(copy: Copy): Observable<any> {
-    return this.http.post("http://localhost:8080/change/copy", copy);
+    return this.http.post("http://localhost:8080/user/change/copy", copy);
   }
 
 }
