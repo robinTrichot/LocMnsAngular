@@ -21,7 +21,7 @@ export class ImageService {
     if (utilisateur.nomImageProfil != null) {
       // Charger l'image de profil à partir du serveur
       this.http
-        .get('http://localhost:8080/image-profil/' + utilisateur.id, { responseType: 'blob' })
+        .get('http://localhost:8080/user/image-profil/' + utilisateur.id, { responseType: 'blob' })
         .subscribe((donneeImage: any) => {
           // Sanitiser l'URL de l'image pour des raisons de sécurité
           utilisateur.imageProfil = this.sanitizer.bypassSecurityTrustUrl(

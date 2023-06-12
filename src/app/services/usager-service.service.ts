@@ -20,7 +20,7 @@ export class UsagerServiceService {
   public getUtilisateurs() {
     // pourquoi on fait ça ? pour pouvoir utilisateur une fonction qu on va rappeler plusieurs fois dans differents comoponents; 
     this.http
-      .get<Usager[]>('http://localhost:8080/usagers')
+      .get<Usager[]>('http://localhost:8080/user/usagers')
       .subscribe((utilisateurs: Usager[]) => {
         // pour chacun des uitliserus on va parcouris leurs images
         // c'est de l'optimisation ici en fait hein 
@@ -44,6 +44,6 @@ export class UsagerServiceService {
   }
 
   public getUtilisateur(id: number): Observable<any> {
-    return this.http.get('http://localhost:8080/usager/' + id);
+    return this.http.get('http://localhost:8080/user/usager/' + id);
   }
 }

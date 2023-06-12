@@ -18,7 +18,7 @@ export class MaterialService {
 
 
   public getMaterials(): Observable<Material[]> {
-    return this.http.get<Material[]>("http://localhost:8080/materials")
+    return this.http.get<Material[]>("http://localhost:8080/user/materials")
   }
 
 

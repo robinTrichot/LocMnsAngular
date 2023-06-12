@@ -104,6 +104,15 @@ export class EmprunterComponent {
       hire.copy = this.formHire.get('radioSelected')!.value;
 
 
+      // calcule de la durée
+      const date1 = new Date(this.selectedDateDebut);
+      const date2 = new Date(this.selectedDateDFin);
+
+      const timerDates = ((date2.getTime() - date1.getTime()) + 86400000) / 86400000;
+      
+      console.log(timerDates);
+
+
       this.listeEventHires.forEach(eventHire => {
         if (eventHire == this.selectedEventHire) {
           hire.eventHire = this.selectedEventHire;
