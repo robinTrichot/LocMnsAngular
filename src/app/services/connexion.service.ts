@@ -11,7 +11,7 @@ import { Usager } from 'src/models/usager';
 export class ConnexionService {
 
   public _utilisateurConnecte: BehaviorSubject<Usager | null> = new BehaviorSubject<Usager | null>(null);
-  
+
 
   constructor(private http: HttpClient,
     private router: Router) {
@@ -40,7 +40,7 @@ export class ConnexionService {
         lastname: donneesUtilisateur.lastname,
         firstname: donneesUtilisateur.firstname,
         login: donneesUtilisateur.login,
-        password: donneesUtilisateur.password,
+        //  password: donneesUtilisateur.password,
         id: donneesUtilisateur.idTest,
         role: {
           role: donneesUtilisateur.role,

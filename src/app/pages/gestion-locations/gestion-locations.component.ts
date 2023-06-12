@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { HireService } from 'src/app/services/hire.service';
 import { Hire } from 'src/models/hire';
@@ -26,11 +26,10 @@ export class GestionLocationsComponent {
     private dialog: MatDialog
   ) { }
 
+date1? : Date;
+date2? : Date;
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, hire : Hire): void {
-   
-    
-
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, hire: Hire): void {
     this.dialog.open(GestionLocationPopUpComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -43,6 +42,9 @@ export class GestionLocationsComponent {
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur));
     this.hireService.getHires().subscribe((hire) => (this.listeHires = hire))
+
+
+
     this.raffraichir();
   }
 
