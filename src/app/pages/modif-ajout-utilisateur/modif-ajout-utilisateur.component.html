@@ -15,12 +15,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>Login</mat-label>
-      <input matInput formControlName="login" />
-      <mat-error> Login obligatoire </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="form-field-spacing">
       <mat-label>password</mat-label>
       <input matInput formControlName="password" />
       <mat-error *ngIf="formulaire.get('password')?.hasError('required')">

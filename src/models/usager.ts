@@ -3,7 +3,6 @@ import { TypeUsager } from "./typeUsager";
 
 export interface Usager {
     id?: number; // le ? rappel : c'est un number ou un undefined, 
-    login?: string;
     password?: string;
     lastname?: string;
     firstname?: string;

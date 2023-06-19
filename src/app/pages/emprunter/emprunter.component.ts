@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { EventHireService } from 'src/app/services/event-hire.service';
 import { EventHire } from 'src/models/eventHire';
 import { __values } from 'tslib';
+import { EMPTY, Subscription, catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-emprunter',
@@ -49,6 +51,8 @@ export class EmprunterComponent {
   // éléments de la table
   displayedColumns: string[] = ['id', 'materiel', 'dateDeDepart', 'dateDeRetour', 'status', 'louer'];
 
+
+
   constructor(
     private connexionService: ConnexionService,
     private copieService: CopyService,
@@ -68,13 +72,37 @@ export class EmprunterComponent {
   }
 
   ngOnInit() {
+
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur));
-    this.copieService.getCopies().subscribe((copy) => (this.listeCopies = copy));
+
+
+    this.copieService.getCopies().subscribe({
+      next: (copy) => (this.listeCopies = copy),
+      error: (erreur) => this.connexionService.deconnexion(),
+      complete: () => console.log("complete")
+    });
+
+    // this.copieService.getCopies()
+    //   .pipe(
+    //     catchError((error) => {
+    //       if (error.status && error.status > 400) {
+    //         this.connexionService.deconnexion();
+    //       }
+    //       return throwError(error);
+    //     })
+    //   )
+    //   .subscribe((copy) => {
+    //     this.listeCopies = copy;
+    //     // Le traitement normal en cas de succès
+    //   });
+
     this.materialService.getMaterials().subscribe((material) => (this.listeMaterials = material));
     this.eventHireService.getEventHires().subscribe((eventHire) => (this.listeEventHires = eventHire))
     this.raffraichir();
   }
+
+
 
   formHire: FormGroup = this.formBuilder.group({
     pickerDebutController: ['', Validators.required],
@@ -109,7 +137,7 @@ export class EmprunterComponent {
       const date2 = new Date(this.selectedDateDFin);
 
       const timerDates = ((date2.getTime() - date1.getTime()) + 86400000) / 86400000;
-      
+
       console.log(timerDates);
 
 

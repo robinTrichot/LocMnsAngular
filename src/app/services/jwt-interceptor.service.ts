@@ -1,13 +1,19 @@
-import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
+import { Observable, catchError, throwError } from 'rxjs';
+import { ConnexionService } from './connexion.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtInterceptorService {
 
-  constructor() { }
+  constructor(
+    private connexionService: ConnexionService,
+    private router: Router
+  ) { }
 
   intercept(
     request: HttpRequest<unknown>,
