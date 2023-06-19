@@ -4,34 +4,26 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Usager } from 'src/models/usager';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConnexionService {
+  public _utilisateurConnecte: BehaviorSubject<Usager | null> =
+    new BehaviorSubject<Usager | null>(null);
 
-  public _utilisateurConnecte: BehaviorSubject<Usager | null> = new BehaviorSubject<Usager | null>(null);
-
-
-  constructor(private http: HttpClient,
-    private router: Router) {
-
+  constructor(private http: HttpClient, private router: Router) {
     this.updateUserConnecte();
   }
 
   connexion(utilisateur: Usager): Observable<string> {
-    return this.http
-      .post(
-        'http://localhost:8080/user/connexion', utilisateur, {
-        responseType: 'text',
-      })
+    return this.http.post('http://localhost:8080/user/connexion', utilisateur, {
+      responseType: 'text',
+    });
   }
 
   updateUserConnecte() {
-
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt != null) {
-
       const data = jwt.split('.')[1];
       const json = window.atob(data);
       const donneesUtilisateur = JSON.parse(json);
@@ -42,10 +34,10 @@ export class ConnexionService {
         id: donneesUtilisateur.idTest,
         role: {
           role: donneesUtilisateur.role,
-          wording: donneesUtilisateur.wording
+          wording: donneesUtilisateur.wording,
         },
-        nomImageProfil: donneesUtilisateur.nomImageProfil
-      }
+        nomImageProfil: donneesUtilisateur.nomImageProfil,
+      };
       this._utilisateurConnecte.next(utilisateur);
     } else {
       this._utilisateurConnecte.next(null);
@@ -53,10 +45,8 @@ export class ConnexionService {
   }
 
   deconnexion() {
-    localStorage.removeItem("jwt");
-    this._utilisateurConnecte.next(null)
-    this.router.navigateByUrl("/connexion");
+    localStorage.removeItem('jwt');
+    this._utilisateurConnecte.next(null);
+    this.router.navigateByUrl('/connexion');
   }
-
-
 }

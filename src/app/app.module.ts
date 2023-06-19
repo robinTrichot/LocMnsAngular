@@ -39,8 +39,8 @@ import { CommonModule } from '@angular/common';
 
 import { GestionMaterielsComponent } from './pages/gestion-materiels/gestion-materiels.component';
 import { FormulaireMaterielsComponent } from './pages/formulaire-materiels/formulaire-materiels.component';
-
-
+import { onErrorResumeNextWith } from 'rxjs';
+import { HttpErrorInterceptor } from './services/error.interceptor';
 
 registerLocaleData(localeFr);
 
@@ -82,14 +82,21 @@ registerLocaleData(localeFr);
     MatNativeDateModule,
     MatRadioModule,
     MatDialogModule,
-    CommonModule
+    CommonModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: JwtInterceptorService,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
