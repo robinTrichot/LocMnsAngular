@@ -26,7 +26,6 @@ export class ModifAjoutUtilisateurComponent {
 
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
-    login: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required]],
     lastname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
     firstname: ['', [Validators.required, Validators.minLength(3), this.noIntegerValidator]],
@@ -69,7 +68,6 @@ export class ModifAjoutUtilisateurComponent {
         this.serviceUtilisateur.getUtilisateur(this.idUtilisateur).subscribe({
           next: (utilisateur: Usager) => {
             this.formulaire.get('mail')?.setValue(utilisateur.mail); // le "?" ne pas oublier que ça renvoit soit un un truc soit un null, au cas c'est null on lui dit faire un truc en fait
-            this.formulaire.get('login')?.setValue(utilisateur.login);
             //   this.formulaire.get('password')?.setValue(utilisateur.password);
             this.formulaire.get('lastname')?.setValue(utilisateur.lastname);
             this.formulaire.get('firstname')?.setValue(utilisateur.firstname);

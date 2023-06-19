@@ -39,8 +39,6 @@ export class ConnexionService {
         mail: donneesUtilisateur.sub,
         lastname: donneesUtilisateur.lastname,
         firstname: donneesUtilisateur.firstname,
-        login: donneesUtilisateur.login,
-        //  password: donneesUtilisateur.password,
         id: donneesUtilisateur.idTest,
         role: {
           role: donneesUtilisateur.role,

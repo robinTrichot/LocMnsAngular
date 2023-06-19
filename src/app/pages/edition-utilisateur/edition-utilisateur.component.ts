@@ -15,7 +15,7 @@ export class EditionUtilisateurComponent {
   utilisateurConnecte: Usager | null = null;
   usersList: Usager[] = [];
 
-  displayedColumns: string[] = ['id', 'login', 'nomImageProfil', 'lastname',
+  displayedColumns: string[] = ['id', 'nomImageProfil', 'lastname',
     'firstname', 'phone', 'cellPhone', 'mail', 'streetNumber', 'nameStreet', 'postalCode', 'city', 'role', 'Edit'];
 
   isAdmin: boolean = false;
@@ -50,8 +50,6 @@ export class EditionUtilisateurComponent {
     this.connexionService.deconnexion();
   }
 
-
-
   onDeleteUser(idUtilisateur: number | undefined) {
     if (idUtilisateur != undefined) {
       this.usagerService
@@ -74,7 +72,6 @@ export class EditionUtilisateurComponent {
       const filteredUsers = this.usersList.filter((utilisateur) => {
         return (
           (utilisateur.id?.toString().toLowerCase().includes(searchLowerCase) ?? false) ||
-          (utilisateur.login?.toLowerCase().includes(searchLowerCase) ?? false) ||
           (utilisateur.lastname?.toLowerCase().includes(searchLowerCase) ?? false) ||
           (utilisateur.firstname?.toLowerCase().includes(searchLowerCase) ?? false) ||
           (utilisateur.phone?.toString().toLowerCase().includes(searchLowerCase) ?? false) ||

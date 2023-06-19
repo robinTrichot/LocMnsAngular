@@ -20,11 +20,9 @@ export class ConnexionComponent {
 
   erreurLogin = false;
 
-
   constructor(private formBuilder: FormBuilder,
     private connexionService: ConnexionService,
     private router: Router) { }
-
 
 
   onSubmit(): void {
