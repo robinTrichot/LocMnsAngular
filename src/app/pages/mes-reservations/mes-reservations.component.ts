@@ -9,10 +9,9 @@ import { Usager } from 'src/models/usager';
 @Component({
   selector: 'app-mes-reservations',
   templateUrl: './mes-reservations.component.html',
-  styleUrls: ['./mes-reservations.component.scss']
+  styleUrls: ['./mes-reservations.component.scss'],
 })
 export class MesReservationsComponent {
-
   utilisateurConnecte: Usager | null = null;
   listHires: Hire[] = [];
 
@@ -21,14 +20,17 @@ export class MesReservationsComponent {
     private hireService: HireService,
     private eventHireService: EventHireService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.connexionService._utilisateurConnecte.subscribe(
-      (utilisateur) => (this.utilisateurConnecte = utilisateur));
+      (utilisateur) => (this.utilisateurConnecte = utilisateur)
+    );
 
     if (this.utilisateurConnecte?.id != null) {
-      this.hireService.getHireByUser(this.utilisateurConnecte.id).subscribe((hires) => this.listHires = hires);
+      this.hireService
+        .getHireByUser(this.utilisateurConnecte.id)
+        .subscribe((hires) => (this.listHires = hires));
     }
     this.raffraichir();
   }
@@ -36,5 +38,4 @@ export class MesReservationsComponent {
   raffraichir(): void {
     this.hireService.getHireByUser(2);
   }
-
 }

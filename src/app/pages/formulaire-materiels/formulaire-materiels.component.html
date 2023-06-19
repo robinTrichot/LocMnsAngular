@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="codeRetour">
     <form *ngSwitchDefault class="container" (ngSubmit)="onSubmit()" [formGroup]="formulaire">
- 
+
         <mat-form-field appearance="fill" class="form-field-spacing">
             <mat-label>nom</mat-label>
             <input matInput formControlName="wording" />
@@ -14,7 +14,8 @@
             <mat-select formControlName="trademarkMaterial" [compareWith]="compareTrademark">
 
 
-                <mat-option *ngFor="let trademark of listTrademarks" [value]="trademark"> {{trademark.wording}} </mat-option>
+                <mat-option *ngFor="let trademark of listTrademarks" [value]="trademark"> {{trademark.wording}}
+                </mat-option>
             </mat-select>
             <mat-error *ngIf="formulaire.get('trademarkMaterial')?.hasError('required')">
                 Une marque doit être choisie
