@@ -1,3 +1,4 @@
+import { Structure } from "./structure";
 import { TypeUsager } from "./typeUsager";
 
 
@@ -14,6 +15,7 @@ export interface Usager {
     postalCode?: string,
     city?: string;
     role: TypeUsager;
+    structure? : Structure[];
 
     createdAt?: Date;
     updatedAt?: Date;

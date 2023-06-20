@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { UsagerServiceService } from './usager-service.service';
 import { ImageService } from './image.service';
+import { environment } from 'src/environments/environment';
 
 describe('UsagerServiceService', () => {
   let service: UsagerServiceService;
@@ -28,7 +29,7 @@ describe('UsagerServiceService', () => {
 
     service.getUtilisateurs();
 
-    const req = httpMock.expectOne('http://localhost:8080/usagers');
+    const req = httpMock.expectOne(environment.serverUrl + '/usagers');
     expect(req.request.method).toBe('GET');
     req.flush(utilisateursMock);
 
@@ -54,7 +55,7 @@ describe('UsagerServiceService', () => {
 
     service.editionUtilisateur(formData).subscribe();
 
-    const req = httpMock.expectOne('http://localhost:8080/admin/addUsager');
+    const req = httpMock.expectOne(environment.serverUrl + '/admin/addUsager');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toBe(formData);
     req.flush({});

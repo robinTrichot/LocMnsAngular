@@ -1,2 +1,4 @@
-export const environment = {};
-// to do deployement
+export const environment = {
+  production: false,
+  serverUrl: '',
+};

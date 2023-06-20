@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EventHire } from 'src/models/eventHire';
+import { Structure } from 'src/models/structure';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventHireService {
+export class StructureService {
   constructor(private http: HttpClient) {}
 
-  public getEventHires(): Observable<EventHire[]> {
-    return this.http.get<EventHire[]>(
-      environment.serverUrl + '/user/EventHire'
+  public getStructures(): Observable<Structure[]> {
+    return this.http.get<Structure[]>(
+      environment.serverUrl + '/user/structures'
     );
   }
 }
