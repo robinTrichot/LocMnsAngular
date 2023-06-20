@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Usager } from 'src/models/usager';
 import { ImageService } from './image.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UsagerServiceService {
   public getUtilisateurs() {
     // pourquoi on fait ça ? pour pouvoir utilisateur une fonction qu on va rappeler plusieurs fois dans differents comoponents; 
     this.http
-      .get<Usager[]>('http://localhost:8080/user/usagers')
+      .get<Usager[]>(environment.serverUrl + '/user/usagers')
       .subscribe((utilisateurs: Usager[]) => {
         // pour chacun des uitliserus on va parcouris leurs images
         // c'est de l'optimisation ici en fait hein 
@@ -35,15 +36,15 @@ export class UsagerServiceService {
 
   // permet de supprimer un utilisateur défini grâce à son "id"
   public deleteUtilisateur(id: number): Observable<any> {
-    return this.http.delete('http://localhost:8080/admin/deleteUsager/' + id);
+    return this.http.delete(environment.serverUrl + '/admin/deleteUsager/' + id);
   }
 
   // donc ici c'est plus un utilisateur mais un formadata; 
   public editionUtilisateur(formData: FormData): Observable<any> {
-    return this.http.post('http://localhost:8080/admin/addUsager', formData);
+    return this.http.post(environment.serverUrl + '/admin/addUsager', formData);
   }
 
   public getUtilisateur(id: number): Observable<any> {
-    return this.http.get('http://localhost:8080/user/usager/' + id);
+    return this.http.get(environment.serverUrl + '/user/usager/' + id);
   }
 }

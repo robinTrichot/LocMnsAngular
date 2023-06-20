@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Usager } from 'src/models/usager';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +17,13 @@ export class ConnexionService {
   }
 
   connexion(utilisateur: Usager): Observable<string> {
-    return this.http.post('http://localhost:8080/user/connexion', utilisateur, {
-      responseType: 'text',
-    });
+    return this.http.post(
+      environment.serverUrl + '/user/connexion',
+      utilisateur,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
   updateUserConnecte() {

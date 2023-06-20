@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 import { Material } from 'src/models/material';
 import { Usager } from 'src/models/usager';
 
@@ -22,7 +23,9 @@ export class ImageService {
     if (utilisateur.nomImageProfil != null) {
       // Charger l'image de profil à partir du serveur
       this.http
-        .get('http://localhost:8080/user/image-profil/' + utilisateur.id, { responseType: 'blob' })
+        .get(environment.serverUrl + '/user/image-profil/' + utilisateur.id, {
+          responseType: 'blob',
+        })
         .subscribe((donneeImage: any) => {
           // Sanitiser l'URL de l'image pour des raisons de sécurité
           utilisateur.imageProfil = this.sanitizer.bypassSecurityTrustUrl(
@@ -35,7 +38,9 @@ export class ImageService {
   chargementPicture(material: Material) {
     if (material.pictureName != null) {
       this.http
-        .get('http://localhost:8080/user/picture-material/' + material.id, { responseType: 'blob' })
+        .get(environment.serverUrl + '/user/picture-material/' + material.id, {
+          responseType: 'blob',
+        })
         .subscribe((donneePicture: any) => {
           material.picture = this.sanitizer.bypassSecurityTrustUrl(
             URL.createObjectURL(donneePicture)

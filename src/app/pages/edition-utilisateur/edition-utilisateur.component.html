@@ -29,6 +29,20 @@
         <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.lastname}} </td>
       </ng-container>
 
+      <!-- jen sui là jarrive pas à afficher par utilisateur la liste précise des structures affiliées -->
+      <ng-container matColumnDef="listeStructures">
+        <th mat-header-cell *matHeaderCellDef> Structures </th>
+        <td mat-cell *matCellDef="let utilisateur">
+
+          <ul>
+            <li *ngFor="let structure of utilisateur.structure">
+              {{ structure.wording }}
+            </li>
+          </ul>
+
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef> Prénom </th>
         <td mat-cell *matCellDef="let utilisateur"> {{utilisateur.firstname}} </td>

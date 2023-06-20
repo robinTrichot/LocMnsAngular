@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Copy } from 'src/models/copy';
 
 @Injectable({
@@ -13,15 +14,15 @@ export class CopyService {
   constructor(private http: HttpClient) { }
 
   public getCopies(): Observable<Copy[]> {
-    return this.http.get<Copy[]>("http://localhost:8080/user/copies")
+    return this.http.get<Copy[]>(environment.serverUrl + '/user/copies')
   }
 
   public getCopie(id: number): Observable<Copy> {
-    return this.http.get<Copy>("http://localhost:8080/user/copie/" + id)
+    return this.http.get<Copy>(environment.serverUrl + '/user/copie/' + id)
   }
 
   public changeStatusCopy(copy: Copy): Observable<any> {
-    return this.http.post("http://localhost:8080/user/change/copy", copy);
+    return this.http.post(environment.serverUrl + '/user/change/copy', copy);
   }
 
 }

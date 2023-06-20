@@ -137,6 +137,7 @@ export class ModifAjoutUtilisateurComponent {
         );
     }
   }
+ 
 
   onImageSelectionnee(event: any) {
     this.fichier = event.target.files[0];
