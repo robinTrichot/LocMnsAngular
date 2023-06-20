@@ -36,7 +36,8 @@
 <ng-container matColumnDef="notice">
     <th mat-header-cell *matHeaderCellDef> Notice </th>
     <td mat-cell *matCellDef="let material">
-        <a *ngIf="material.notice" [href]="'http://localhost:8080/user/notice-file/' + material.notice" target="_blank" download>
+        <a *ngIf="material.notice" [href]="environmentServerUrl + '/user/notice-file/' + material.notice"
+            target="_blank" download>
             Voir la notice
         </a>
     </td>
