@@ -23,6 +23,7 @@ export class FormulaireMaterielsComponent {
   codeRetour: number = 0;
   messageErreur: string = '';
   fichier: File | null = null;
+  notice: File | null = null;
   listTrademarks: TrademarkMaterial[] = [];
 
   formulaire: FormGroup = this.formBuilder.group({
@@ -86,8 +87,6 @@ export class FormulaireMaterielsComponent {
 
   onSubmit() {
     if (this.formulaire.valid) {
-      console.log(this.formulaire.value)
-
       const formData = new FormData();
 
       const material: Material = this.formulaire.value; // donc on recupere le formulaire ici
@@ -97,6 +96,10 @@ export class FormulaireMaterielsComponent {
 
       if (this.fichier) {
         formData.append('fichier', this.fichier);
+      }
+
+      if (this.notice) {
+        formData.append('notice', this.notice);
       }
 
       formData.append(
@@ -115,6 +118,10 @@ export class FormulaireMaterielsComponent {
 
   onImageSelectionnee(event: any) {
     this.fichier = event.target.files[0];
+  }
+
+  onNoticeSelectionnee(event: any) {
+    this.notice = event.target.files[0];
   }
 
   compareTrademark(trademarkOption: any, trademarkMaterial: any) {

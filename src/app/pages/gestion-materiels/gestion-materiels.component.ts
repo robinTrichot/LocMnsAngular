@@ -4,9 +4,6 @@ import { MaterialService } from 'src/app/services/material.service';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { Usager } from 'src/models/usager';
-import { UsagerServiceService } from 'src/app/services/usager-service.service';
-
-
 
 @Component({
   selector: 'app-gestion-materiels',
@@ -26,9 +23,6 @@ export class GestionMaterielsComponent {
   constructor(
     private materialService: MaterialService,
     private connexionService: ConnexionService,
-
-    private imageCompress: NgxImageCompressService,
-
   ) {}
 
   ngOnInit() {
