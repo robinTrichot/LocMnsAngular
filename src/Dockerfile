@@ -13,7 +13,7 @@ RUN npm run build
 
 
 FROM nginx:1.17.1-alpine
-COPY --from=build /app/dist/nom_application /usr/share/nginx/html
+COPY --from=build /app/dist/projet-loc-mns-v3 /usr/share/nginx/html
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 
