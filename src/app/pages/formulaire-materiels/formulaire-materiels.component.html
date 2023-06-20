@@ -22,10 +22,6 @@
             </mat-error>
         </mat-form-field>
 
-
-
-
-
         <div>
             <input #fileSelector type="file" style="display: none;" (change)="onImageSelectionnee($event)">
             <button mat-mini-fab type="button" color="primary" (click)="fileSelector.click()">
@@ -35,7 +31,19 @@
                     </span>
                 </mat-icon>
             </button>
-            <span>{{fichier != null ? fichier.name : " Aucun fichier sélectionné"}}</span>
+            <span>{{fichier != null ? fichier.name : " Aucune image sélectionnée"}}</span>
+        </div>
+
+        <div>
+            <input #pdfSelector type="file" style="display: none;" (change)="onNoticeSelectionnee($event)">
+            <button mat-mini-fab type="button" color="primary" (click)="pdfSelector.click()">
+                <mat-icon>
+                    <span class="material-symbols-outlined">
+                        attach_file_add
+                    </span>
+                </mat-icon>
+            </button>
+            <span>{{ notice != null ? notice.name : " Aucun PDF sélectionné"}}</span>
         </div>
 
         <div class="action-buttons">
