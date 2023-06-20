@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GestionMaterielsComponent {
 
-  environmentServerUrl = environment.serverUrl;
+  serverUrl = environment.serverUrl;
 
   utilisateurConnecte: Usager | null = null;
   materialsList: Material[] = [];
