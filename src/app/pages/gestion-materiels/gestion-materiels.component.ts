@@ -3,12 +3,16 @@ import { Material } from 'src/models/material';
 import { MaterialService } from 'src/app/services/material.service';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { Usager } from 'src/models/usager';
+<<<<<<< HEAD
 import { environment } from 'src/environments/environment'
+=======
+import { environment } from 'src/environments/environment';
+>>>>>>> b0822fbd12d3dd3292e5a2382c95246f8ca6ce8b
 
 @Component({
   selector: 'app-gestion-materiels',
   templateUrl: './gestion-materiels.component.html',
-  styleUrls: ['./gestion-materiels.component.scss']
+  styleUrls: ['./gestion-materiels.component.scss'],
 })
 export class GestionMaterielsComponent {
 
@@ -17,34 +21,42 @@ export class GestionMaterielsComponent {
   utilisateurConnecte: Usager | null = null;
   materialsList: Material[] = [];
 
-  displayedColumns: string[] = ['id', 'wording', 'pictureName', 'notice', 'trademarkMaterial', 'Edit'];
+  displayedColumns: string[] = [
+    'id',
+    'wording',
+    'pictureName',
+    'notice',
+    'trademarkMaterial',
+    'Edit',
+  ];
 
   isAdmin: boolean = false;
   search: string = '';
 
   constructor(
     private materialService: MaterialService,
-    private connexionService: ConnexionService,
+    private connexionService: ConnexionService
   ) {}
 
   ngOnInit() {
     this.connexionService._utilisateurConnecte.subscribe(
-      (utilisateur) => (
-        this.isAdmin = utilisateur?.role.role == "ROLE_ADMIN"));
+      (utilisateur) => (this.isAdmin = utilisateur?.role.role == 'ROLE_ADMIN')
+    );
 
     this.materialService._materials.subscribe(
-      (materials) => (this.materialsList = materials));
+      (materials) => (this.materialsList = materials)
+    );
 
     this.connexionService._utilisateurConnecte.subscribe(
-      (utilisateur) => (this.utilisateurConnecte = utilisateur));
-  
+      (utilisateur) => (this.utilisateurConnecte = utilisateur)
+    );
 
     this.raffraichir();
   }
 
-raffraichir(): void {
-  this.materialService.getMaterialsWithPicture();
-}
+  raffraichir(): void {
+    this.materialService.getMaterialsWithPicture();
+  }
   onDeconnexion() {
     this.connexionService.deconnexion();
   }
@@ -55,8 +67,9 @@ raffraichir(): void {
 
       const filteredMaterials = this.materialsList.filter((material) => {
         return (
-          (material.id?.toString().toLowerCase().includes(searchLowerCase) ?? false) ||
-          (material.wording?.toLowerCase().includes(searchLowerCase) ?? false) 
+          (material.id?.toString().toLowerCase().includes(searchLowerCase) ??
+            false) ||
+          (material.wording?.toLowerCase().includes(searchLowerCase) ?? false)
         );
       });
 
@@ -74,16 +87,16 @@ raffraichir(): void {
 
   onDeleteMaterial(idMaterial: number | undefined) {
     if (idMaterial != undefined) {
-      this.materialService
-        .deleteMaterial(idMaterial)
-        .subscribe(
-          (material) => {
-            this.raffraichir();
-          },
-          (error) => {
-            alert("Impossible de supprimer le matériel. Veuillez vérifier les contraintes de location.");
-          }
-        );
+      this.materialService.deleteMaterial(idMaterial).subscribe(
+        (material) => {
+          this.raffraichir();
+        },
+        (error) => {
+          alert(
+            'Impossible de supprimer le matériel. Veuillez vérifier les contraintes de location.'
+          );
+        }
+      );
     }
   }
 }
