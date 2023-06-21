@@ -23,7 +23,6 @@ export class HireService {
   }
 
   public validateHire(hire: Hire): Observable<any> {
-    console.log('bien rentré coté front ');
     return this.http.post(environment.serverUrl + '/admin/validate/hire', hire);
   }
 }
