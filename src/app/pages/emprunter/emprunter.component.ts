@@ -46,6 +46,8 @@ export class EmprunterComponent {
   selectedCopy: boolean = false;
   differenceInvalid: boolean = false;
 
+  minDate? : Date;
+
   // éléments de la table
   displayedColumns: string[] = [
     'id',
@@ -63,7 +65,7 @@ export class EmprunterComponent {
     private formBuilder: FormBuilder,
     private hireService: HireService,
     private eventHireService: EventHireService,
-    private router: Router
+    private router: Router,
   ) {}
 
   onDateSelected(event: MatDatepickerInputEvent<Date>) {
@@ -75,6 +77,7 @@ export class EmprunterComponent {
   }
 
   ngOnInit() {
+    this.minDate = new Date();
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur)
     );

@@ -72,7 +72,7 @@
           <td style="background-color: rgb(64, 133, 133);"><mat-form-field>
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="pickerDebut" formControlName="pickerDebutController"
-                (dateChange)="onDateSelected($event)">
+                (dateChange)="onDateSelected($event)" [min]="minDate" readonly>
               <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
               <mat-datepicker #pickerDebut></mat-datepicker>
@@ -81,7 +81,7 @@
           <td style="background-color: rgb(64, 133, 133);"><mat-form-field>
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="pickerFin" formControlName="pickerFinController"
-                (dateChange)="onDateFinSelected($event)">
+                (dateChange)="onDateFinSelected($event)" [min]="minDate" readonly>
               <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
               <mat-datepicker #pickerFin></mat-datepicker>
