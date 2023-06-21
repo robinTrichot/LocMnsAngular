@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Material } from 'src/models/material';
 import { MaterialService } from 'src/app/services/material.service';
 import { ConnexionService } from 'src/app/services/connexion.service';
-import { NgxImageCompressService } from 'ngx-image-compress';
 import { Usager } from 'src/models/usager';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-gestion-materiels',
@@ -11,6 +11,8 @@ import { Usager } from 'src/models/usager';
   styleUrls: ['./gestion-materiels.component.scss']
 })
 export class GestionMaterielsComponent {
+
+  environmentServerUrl = environment.serverUrl;
 
   utilisateurConnecte: Usager | null = null;
   materialsList: Material[] = [];
