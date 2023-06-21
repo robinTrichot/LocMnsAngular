@@ -73,7 +73,6 @@
               <mat-label>Date de début</mat-label>
               <input matInput [matDatepicker]="pickerDebut" formControlName="pickerDebutController"
                 (dateChange)="onDateSelected($event)" [min]="minDate" readonly>
-              <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
               <mat-datepicker #pickerDebut></mat-datepicker>
             </mat-form-field></td>
@@ -82,7 +81,6 @@
               <mat-label>Date de fin</mat-label>
               <input matInput [matDatepicker]="pickerFin" formControlName="pickerFinController"
                 (dateChange)="onDateFinSelected($event)" [min]="minDate" readonly>
-              <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
               <mat-datepicker #pickerFin></mat-datepicker>
             </mat-form-field></td>
