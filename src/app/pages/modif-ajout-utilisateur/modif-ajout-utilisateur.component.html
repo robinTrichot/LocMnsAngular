@@ -3,57 +3,57 @@
 
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>Email</mat-label>
+      <mat-label>Mail</mat-label>
       <input matInput formControlName="mail" />
 
       <mat-error *ngIf="formulaire.get('mail')?.hasError('mail')">
-        Email invalid
+        Mail non valide
       </mat-error>
       <mat-error *ngIf="formulaire.get('mail')?.hasError('required')">
-        Email obligatoire
+        Mail obligatoire
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>password</mat-label>
+      <mat-label>Mot de passe</mat-label>
       <input matInput formControlName="password" />
       <mat-error *ngIf="formulaire.get('password')?.hasError('required')">
-        password obligatoire
+        Mot de passe obligatoire
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>lastname</mat-label>
+      <mat-label>Nom</mat-label>
       <input matInput formControlName="lastname" />
       <mat-error *ngIf="formulaire.get('lastname')?.hasError('required')">
-        lastname obligatoire
+        Nom obligatoire
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>firstname</mat-label>
+      <mat-label>Prénom</mat-label>
       <input matInput formControlName="firstname" />
       <mat-error *ngIf="formulaire.get('firstname')?.hasError('required')">
-        firstname obligatoire
+        Prénom obligatoire
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>phone</mat-label>
+      <mat-label>Téléphone</mat-label>
       <input matInput formControlName="phone" />
       <mat-error *ngIf="formulaire.get('phone')?.hasError('required')">
-        phone obligatoire
+        Téléphone obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('phone')?.hasError('integer')">
-        Veuillez entrer un numero de téléphone dans ce champ
+        Veuillez entrer un numéro de téléphone dans ce champ
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>cellPhone</mat-label>
+      <mat-label>Portable</mat-label>
       <input matInput formControlName="cellPhone" />
       <mat-error *ngIf="formulaire.get('cellPhone')?.hasError('required')">
-        cellPhone obligatoire
+        Portable obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('cellPhone')?.hasError('integer')">
         Il faut un nombre
@@ -61,10 +61,10 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>streetNumber</mat-label>
+      <mat-label>N°</mat-label>
       <input matInput formControlName="streetNumber" />
       <mat-error *ngIf="formulaire.get('streetNumber')?.hasError('required')">
-        streetNumber obligatoire
+        Numéro de rue obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('streetNumber')?.hasError('integer')">
         Il faut un nombre
@@ -72,10 +72,10 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>nameStreet</mat-label>
+      <mat-label>Rue</mat-label>
       <input matInput formControlName="nameStreet" />
       <mat-error *ngIf="formulaire.get('nameStreet')?.hasError('required')">
-        nameStreet obligatoire
+        Nom de rue obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('nameStreet')?.hasError('noInteger')">
         Veuillez ne pas entrer de valeur numérique dans ce champ.
@@ -83,18 +83,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>postalCode</mat-label>
+      <mat-label>Code postal</mat-label>
       <input matInput formControlName="postalCode" />
       <mat-error *ngIf="formulaire.get('postalCode')?.hasError('required')">
-        postalCode obligatoire
+        Code postal obligatoire
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>city</mat-label>
+      <mat-label>Ville</mat-label>
       <input matInput formControlName="city" />
       <mat-error *ngIf="formulaire.get('city')?.hasError('required')">
-        city obligatoire
+        Ville obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('city')?.hasError('noInteger')">
         Veuillez ne pas entrer de valeur numérique dans ce champ.
@@ -103,7 +103,7 @@
 
 
     <mat-form-field appearance="fill" class="form-field-spacing">
-      <mat-label>role</mat-label>
+      <mat-label>ROLE</mat-label>
       <mat-select formControlName="role" [compareWith]="compareRole">
 
 
@@ -127,7 +127,7 @@
           </span>
         </mat-icon>
       </button>
-      <span>{{fichier != null ? fichier.name : " Aucun fichier sélectionné"}}</span>
+      <span>{{fichier != null ? fichier.name : " Aucune photo sélectionnée"}}</span>
     </div>
     <div class="action-buttons">
       <button mat-raised-button type="submit" color="primary">

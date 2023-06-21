@@ -20,9 +20,9 @@ export class EditionUtilisateurComponent {
   displayedColumns: string[] = [
     'id',
     'nomImageProfil',
+    'firstname',
     'lastname',
     'listeStructures',
-    'firstname',
     'phone',
     'cellPhone',
     'mail',

@@ -2,7 +2,7 @@
     <form *ngSwitchDefault class="container" (ngSubmit)="onSubmit()" [formGroup]="formulaire">
 
         <mat-form-field appearance="fill" class="form-field-spacing">
-            <mat-label>nom</mat-label>
+            <mat-label>Nom du matériel</mat-label>
             <input matInput formControlName="wording" />
             <mat-error *ngIf="formulaire.get('wording')?.hasError('required')">
                 nom obligatoire
@@ -10,7 +10,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-field-spacing">
-            <mat-label>marque</mat-label>
+            <mat-label>Marque</mat-label>
             <mat-select formControlName="trademarkMaterial" [compareWith]="compareTrademark">
 
 

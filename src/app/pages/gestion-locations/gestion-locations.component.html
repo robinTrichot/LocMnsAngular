@@ -4,7 +4,7 @@
         <ng-container *ngIf="hire.status == 'en attente'">
             <thead>
                 <tr>
-                    <th>Emprenteur</th>
+                    <th>Emprunteur</th>
                     <th>Matériel</th>
                     <th>Date de début</th>
                     <th>Date de fin </th>
@@ -28,18 +28,19 @@
         </ng-container>
     </table>
 </div>
-
+<br>
+<br>
 <div>
     <span>Les reservations en cours : </span>
     <table *ngFor="let hire of  listeHires" class="equal-width-table">
         <ng-container *ngIf="hire.status == 'en cours'">
             <thead>
                 <tr>
-                    <th>Emprenteur</th>
+                    <th>Emprunteur</th>
                     <th>Matériel</th>
                     <th>Date de début </th>
                     <th>Date de fin </th>
-                    <th>status </th>
+                    <th>Statut </th>
                     <th>Localisation </th>
                 </tr>
             </thead>
