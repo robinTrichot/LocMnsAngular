@@ -3,11 +3,8 @@ import { Material } from 'src/models/material';
 import { MaterialService } from 'src/app/services/material.service';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { Usager } from 'src/models/usager';
-<<<<<<< HEAD
 import { environment } from 'src/environments/environment'
-=======
-import { environment } from 'src/environments/environment';
->>>>>>> b0822fbd12d3dd3292e5a2382c95246f8ca6ce8b
+
 
 @Component({
   selector: 'app-gestion-materiels',
