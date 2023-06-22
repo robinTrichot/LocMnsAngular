@@ -41,6 +41,7 @@ import { GestionMaterielsComponent } from './pages/gestion-materiels/gestion-mat
 import { FormulaireMaterielsComponent } from './pages/formulaire-materiels/formulaire-materiels.component';
 import { onErrorResumeNextWith } from 'rxjs';
 import { HttpErrorInterceptor } from './services/error.interceptor';
+import { EmailVerificationInterceptor } from './services/email-verification.interceptor';
 
 registerLocaleData(localeFr);
 
