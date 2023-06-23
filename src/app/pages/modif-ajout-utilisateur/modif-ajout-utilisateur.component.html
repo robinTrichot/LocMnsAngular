@@ -132,6 +132,10 @@
       </button>
       <a routerLink="/administration/edition-utilisateur" routerLink="/administration/edition-utilisateur"
         mat-raised-button color="warn">Annuler</a>
+      <ng-container *ngIf="tookEmailYet">
+        <span style="color: red;">Cet email est déjà pris</span>
+      </ng-container>
+
     </div>
   </form>
 

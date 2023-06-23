@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { RoleService } from 'src/app/services/role.service';
 import { UsagerServiceService } from 'src/app/services/usager-service.service';
@@ -26,6 +27,8 @@ export class ModifAjoutUtilisateurComponent {
   messageErreur: string = '';
   fichier: File | null = null;
   listeRole: TypeUsager[] = [];
+
+  tookEmailYet : boolean = false;
 
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
@@ -115,7 +118,7 @@ export class ModifAjoutUtilisateurComponent {
 
   onSubmit() {
     this.configurePasswordValidator();
-    
+
     if (this.formulaire.valid) {
       const formData = new FormData();
       const utilisateur: Usager = this.formulaire.value;
@@ -135,19 +138,44 @@ export class ModifAjoutUtilisateurComponent {
       if (this.idUtilisateur) {
         this.serviceUtilisateur
           .editionUtilisateurModif(formData) // Je modifie l'utilisateur
-          .subscribe((resultat) => {
-            this.router.navigateByUrl('/administration/edition-utilisateur');
-          });
+          .subscribe(
+            (resultat) => {
+              this.router.navigateByUrl('/administration/edition-utilisateur');
+            },
+            (error) => {
+              if (error.status === 409) {
+                this.tookEmailYet = true;
+                console.error(
+                  "Cet utilisateur existe déjà, l'email est déjà pris"
+                );
+              } else {
+                // Gérer les autres erreurs ici
+                console.error("Une erreur s'est produite :", error);
+              }
+            }
+          );
       } else {
         this.serviceUtilisateur
           .editionUtilisateur(formData) // J'ajoute l'utilisateur.
-          .subscribe((resultat) => {
-            this.router.navigateByUrl('/administration/edition-utilisateur');
-          });
+          .subscribe(
+            (resultat) => {
+              this.router.navigateByUrl('/administration/edition-utilisateur');
+            },
+            (error) => {
+              if (error.status === 409) {
+                 this.tookEmailYet = true;
+                console.error(
+                  "Cet utilisateur existe déjà, l'email est déjà pris"
+                );
+              } else {
+                // Gérer les autres erreurs ici
+                console.error("Une erreur s'est produite :", error);
+              }
+            }
+          );
       }
     }
   }
-
   //methode assez complexe
   // pour faire en sorte que si l'utilisateur existe et que je veux le modifier le validtor password nexite pas
   // en revanche je veux un validator si l'utilisateur doit être crée.
@@ -161,7 +189,6 @@ export class ModifAjoutUtilisateurComponent {
       // Si idUtilisateur est null, ajoutez le validateur de mot de passe
       passwordControl?.setValidators([Validators.required]);
     }
-
     passwordControl?.updateValueAndValidity();
   }
 
