@@ -1,0 +1,16 @@
+version: '4'
+services:
+  conteneur-loc-mns-front:
+    image: loc-mns-front
+    build:
+      context: .
+    restart: always
+    ports:
+      - "4200:80"
+    networks:
+      - locmnsbackend_default
+
+networks:
+  locmnsbackend_default:
+    external: true
+
