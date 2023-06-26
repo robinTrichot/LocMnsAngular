@@ -43,7 +43,7 @@ export class UsagerServiceService {
   }
 
   public editionUtilisateurModif(formData: FormData): Observable<any> {
-    return this.http.post(environment.serverUrl + '/admin/putUsager', formData);
+    return this.http.put(environment.serverUrl + '/admin/putUsager', formData);
   }
 
   public getUtilisateur(id: number): Observable<any> {
