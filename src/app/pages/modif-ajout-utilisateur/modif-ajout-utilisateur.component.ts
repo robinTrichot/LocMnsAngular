@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { RoleService } from 'src/app/services/role.service';
 import { UsagerServiceService } from 'src/app/services/usager-service.service';
@@ -27,9 +28,11 @@ export class ModifAjoutUtilisateurComponent {
   fichier: File | null = null;
   listeRole: TypeUsager[] = [];
 
+  tookEmailYet : boolean = false;
+
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.required]],
+    password: [''], // c'est le validator dynamique
     lastname: [
       '',
       [Validators.required, Validators.minLength(3), this.noIntegerValidator],
@@ -62,6 +65,8 @@ export class ModifAjoutUtilisateurComponent {
       (utilisateur) => (this.utilisateurConnecte = utilisateur)
     );
 
+    this.configurePasswordValidator();
+
     this.raffraichir();
 
     this.serviceRole.getRoles().subscribe({
@@ -76,7 +81,7 @@ export class ModifAjoutUtilisateurComponent {
         this.serviceUtilisateur.getUtilisateur(this.idUtilisateur).subscribe({
           next: (utilisateur: Usager) => {
             this.formulaire.get('mail')?.setValue(utilisateur.mail); // le "?" ne pas oublier que ça renvoit soit un un truc soit un null, au cas c'est null on lui dit faire un truc en fait
-            //   this.formulaire.get('password')?.setValue(utilisateur.password);
+            this.formulaire.get('password')?.setValue(utilisateur.password);
             this.formulaire.get('lastname')?.setValue(utilisateur.lastname);
             this.formulaire.get('firstname')?.setValue(utilisateur.firstname);
             this.formulaire.get('phone')?.setValue(utilisateur.phone);
@@ -112,12 +117,12 @@ export class ModifAjoutUtilisateurComponent {
   }
 
   onSubmit() {
-    if (this.formulaire.valid) {
-      //tout ceci permet de prendre et transformer le fichier donné par l'utilisateur;
-      const formData = new FormData();
+    this.configurePasswordValidator();
 
-      const utilisateur: Usager = this.formulaire.value; // donc on recupere le formulaire ici
-      utilisateur.id = this.idUtilisateur; // + un id;
+    if (this.formulaire.valid) {
+      const formData = new FormData();
+      const utilisateur: Usager = this.formulaire.value;
+      utilisateur.id = this.idUtilisateur;
 
       if (this.fichier) {
         formData.append('fichier', this.fichier);
@@ -130,14 +135,62 @@ export class ModifAjoutUtilisateurComponent {
         })
       );
 
-      this.serviceUtilisateur
-        .editionUtilisateur(formData) // ici on passe plutôt le formadata, ce n'est plus un body raw mais un body formdata qu'on envoit
-        .subscribe((resultat) =>
-          this.router.navigateByUrl('/administration/edition-utilisateur')
-        );
+      if (this.idUtilisateur) {
+        this.serviceUtilisateur
+          .editionUtilisateurModif(formData) // Je modifie l'utilisateur
+          .subscribe(
+            (resultat) => {
+              this.router.navigateByUrl('/administration/edition-utilisateur');
+            },
+            (error) => {
+              if (error.status === 409) {
+                this.tookEmailYet = true;
+                console.error(
+                  "Cet utilisateur existe déjà, l'email est déjà pris"
+                );
+              } else {
+                // Gérer les autres erreurs ici
+                console.error("Une erreur s'est produite :", error);
+              }
+            }
+          );
+      } else {
+        this.serviceUtilisateur
+          .editionUtilisateur(formData) // J'ajoute l'utilisateur.
+          .subscribe(
+            (resultat) => {
+              this.router.navigateByUrl('/administration/edition-utilisateur');
+            },
+            (error) => {
+              if (error.status === 409) {
+                 this.tookEmailYet = true;
+                console.error(
+                  "Cet utilisateur existe déjà, l'email est déjà pris"
+                );
+              } else {
+                // Gérer les autres erreurs ici
+                console.error("Une erreur s'est produite :", error);
+              }
+            }
+          );
+      }
     }
   }
- 
+  //methode assez complexe
+  // pour faire en sorte que si l'utilisateur existe et que je veux le modifier le validtor password nexite pas
+  // en revanche je veux un validator si l'utilisateur doit être crée.
+  private configurePasswordValidator(): void {
+    const passwordControl = this.formulaire.get('password');
+
+    if (this.idUtilisateur) {
+      // Si idUtilisateur n'est pas null, supprimez le validateur de mot de passe
+      passwordControl?.clearValidators();
+    } else {
+      // Si idUtilisateur est null, ajoutez le validateur de mot de passe
+      passwordControl?.setValidators([Validators.required]);
+    }
+    passwordControl?.updateValueAndValidity();
+  }
 
   onImageSelectionnee(event: any) {
     this.fichier = event.target.files[0];

@@ -7,27 +7,23 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UsagerServiceService {
-
   public _utilisateurs: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
-  constructor(private http: HttpClient,
-    private imageService: ImageService,
-  ) { }
+  constructor(private http: HttpClient, private imageService: ImageService) {}
 
   public getUtilisateurs() {
-    // pourquoi on fait ça ? pour pouvoir utilisateur une fonction qu on va rappeler plusieurs fois dans differents comoponents; 
+    // pourquoi on fait ça ? pour pouvoir utilisateur une fonction qu on va rappeler plusieurs fois dans differents comoponents;
     this.http
       .get<Usager[]>(environment.serverUrl + '/user/usagers')
       .subscribe((utilisateurs: Usager[]) => {
         // pour chacun des uitliserus on va parcouris leurs images
-        // c'est de l'optimisation ici en fait hein 
+        // c'est de l'optimisation ici en fait hein
 
         for (let utilisateur of utilisateurs) {
-          this.imageService.chargementImageProfil(utilisateur)
+          this.imageService.chargementImageProfil(utilisateur);
         }
 
         this._utilisateurs.next(utilisateurs);
@@ -36,12 +32,18 @@ export class UsagerServiceService {
 
   // permet de supprimer un utilisateur défini grâce à son "id"
   public deleteUtilisateur(id: number): Observable<any> {
-    return this.http.delete(environment.serverUrl + '/admin/deleteUsager/' + id);
+    return this.http.delete(
+      environment.serverUrl + '/admin/deleteUsager/' + id
+    );
   }
 
-  // donc ici c'est plus un utilisateur mais un formadata; 
+  // donc ici c'est plus un utilisateur mais un formadata;
   public editionUtilisateur(formData: FormData): Observable<any> {
     return this.http.post(environment.serverUrl + '/admin/addUsager', formData);
+  }
+
+  public editionUtilisateurModif(formData: FormData): Observable<any> {
+    return this.http.put(environment.serverUrl + '/admin/putUsager', formData);
   }
 
   public getUtilisateur(id: number): Observable<any> {
