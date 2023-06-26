@@ -24,17 +24,18 @@
         <td mat-cell *matCellDef="let utilisateur"> <img mat-card-image [attr.src]="utilisateur.imageProfil" /> </td>
       </ng-container>
 
-      <!-- jen sui là jarrive pas à afficher par utilisateur la liste précise des structures affiliées -->
+
       <ng-container matColumnDef="listeStructures">
-        <th mat-header-cell *matHeaderCellDef> Structure </th>
+        <th mat-header-cell *matHeaderCellDef>Structure</th>
         <td mat-cell *matCellDef="let utilisateur">
-      
-          <ul>
-            <li *ngFor="let structure of utilisateur.structure">
+          <ul *ngIf="utilisateur.structures.length > 0">
+            <li *ngFor="let structure of utilisateur.structures">
               {{ structure.wording }}
             </li>
           </ul>
-      
+          <span *ngIf="utilisateur.structures.length === 0">
+            Aucune structure
+          </span>
         </td>
       </ng-container>
 

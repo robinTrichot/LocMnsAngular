@@ -17,7 +17,7 @@
     <ng-container *ngIf="idUtilisateur == null">
       <mat-form-field appearance="fill" class="form-field-spacing">
         <mat-label>Mot de passe</mat-label>
-        <input matInput formControlName="password" />
+        <input matInput formControlName="password" type="password" />
         <mat-error *ngIf="formulaire.get('password')?.hasError('required')">
           Mot de passe obligatoire
         </mat-error>

@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { RoleService } from 'src/app/services/role.service';
 import { UsagerServiceService } from 'src/app/services/usager-service.service';
@@ -32,7 +31,7 @@ export class ModifAjoutUtilisateurComponent {
 
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
-    password: [''], // c'est le validator dynamique
+    password: [''], // j'utilise un valdiator dynamique
     lastname: [
       '',
       [Validators.required, Validators.minLength(3), this.noIntegerValidator],
