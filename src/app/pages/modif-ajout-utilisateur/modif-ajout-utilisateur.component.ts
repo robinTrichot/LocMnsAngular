@@ -8,7 +8,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConnexionService } from 'src/app/services/connexion.service';
 import { RoleService } from 'src/app/services/role.service';
+import { StructureService } from 'src/app/services/structure.service';
 import { UsagerServiceService } from 'src/app/services/usager-service.service';
+import { Structure } from 'src/models/structure';
 import { TypeUsager } from 'src/models/typeUsager';
 import { Usager } from 'src/models/usager';
 
@@ -26,8 +28,8 @@ export class ModifAjoutUtilisateurComponent {
   messageErreur: string = '';
   fichier: File | null = null;
   listeRole: TypeUsager[] = [];
-
-  tookEmailYet : boolean = false;
+  listeStructure: Structure[] = [];
+  tookEmailYet: boolean = false;
 
   formulaire: FormGroup = this.formBuilder.group({
     mail: ['', [Validators.email, Validators.required]],
@@ -40,13 +42,17 @@ export class ModifAjoutUtilisateurComponent {
       '',
       [Validators.required, Validators.minLength(3), this.noIntegerValidator],
     ],
-    phone: ['', [Validators.required, this.integerValidator]],
+    phone: [
+      '',
+      [Validators.required, Validators.minLength(10), this.integerValidator],
+    ],
     cellPhone: ['', [Validators.required, this.integerValidator]],
     streetNumber: ['', [Validators.required, this.integerValidator]],
     nameStreet: ['', [Validators.required, this.noIntegerValidator]],
     postalCode: ['', [Validators.required]],
     city: ['', [Validators.required, this.noIntegerValidator]],
     role: [null, [Validators.required]],
+    structure: [null, [Validators.required]],
   });
 
   constructor(
@@ -56,13 +62,19 @@ export class ModifAjoutUtilisateurComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private serviceRole: RoleService
+    private serviceRole: RoleService,
+    private structureService: StructureService
   ) {}
 
   ngOnInit() {
     this.connexionService._utilisateurConnecte.subscribe(
       (utilisateur) => (this.utilisateurConnecte = utilisateur)
     );
+
+    this.structureService.getStructures().subscribe({
+      next: (listeStructure) => (this.listeStructure = listeStructure),
+      error: (erreur) => console.log(erreur),
+    });
 
     this.configurePasswordValidator();
 
@@ -92,6 +104,7 @@ export class ModifAjoutUtilisateurComponent {
             this.formulaire.get('postalCode')?.setValue(utilisateur.postalCode);
             this.formulaire.get('city')?.setValue(utilisateur.city);
             this.formulaire.get('role')?.setValue(utilisateur.role);
+            this.formulaire.get('structure')?.setValue(utilisateur.structure);
           },
 
           error: (erreurRequete) => {
@@ -136,7 +149,7 @@ export class ModifAjoutUtilisateurComponent {
 
       if (this.idUtilisateur) {
         this.serviceUtilisateur
-          .editionUtilisateurModif(formData) // Je modifie l'utilisateur
+          .editionUtilisateurModif(formData) 
           .subscribe(
             (resultat) => {
               this.router.navigateByUrl('/administration/edition-utilisateur');
@@ -155,14 +168,14 @@ export class ModifAjoutUtilisateurComponent {
           );
       } else {
         this.serviceUtilisateur
-          .editionUtilisateur(formData) // J'ajoute l'utilisateur.
+          .editionUtilisateur(formData) 
           .subscribe(
             (resultat) => {
               this.router.navigateByUrl('/administration/edition-utilisateur');
             },
             (error) => {
               if (error.status === 409) {
-                 this.tookEmailYet = true;
+                this.tookEmailYet = true;
                 console.error(
                   "Cet utilisateur existe déjà, l'email est déjà pris"
                 );
@@ -200,6 +213,13 @@ export class ModifAjoutUtilisateurComponent {
       roleUtilisateur != null && roleUtilisateur.id == roleOption.id // il faut toujours faire cette forme là avec le compareWtith
     ); // voici la comparaison entre les Role
     // donc on vient vérifier déjà sil est null et ensuite on fait la vérififcation si ça match;
+  }
+
+  compareStructure(structureOption: any, structureUtilisateur: any) {
+    return (
+      structureUtilisateur != null &&
+      structureUtilisateur.id == structureOption.id
+    );
   }
 
   integerValidator(control: AbstractControl): { [key: string]: any } | null {

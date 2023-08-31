@@ -58,7 +58,7 @@
         Portable obligatoire
       </mat-error>
       <mat-error *ngIf="formulaire.get('cellPhone')?.hasError('integer')">
-        Il faut un nombre
+        Veuillez entrer un numéro de téléphone dans ce cham
       </mat-error>
     </mat-form-field>
 
@@ -114,6 +114,17 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="form-field-spacing">
+      <mat-label>STRUCTURES</mat-label>
+      <mat-select formControlName="structure" [compareWith]="compareStructure" multiple>
+        <mat-option *ngFor="let structure of listeStructure" [value]="structure">
+          {{ structure.wording }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formulaire.get('structure')?.hasError('required')">
+        Au moins une structure doit être sélectionnée
+      </mat-error>
+    </mat-form-field>
 
     <div>
       <input #fileSelector type="file" style="display: none;" (change)="onImageSelectionnee($event)">

@@ -22,7 +22,7 @@ export class CopyService {
   }
 
   public changeStatusCopy(copy: Copy): Observable<any> {
-    return this.http.post(environment.serverUrl + '/user/change/copy', copy);
+    return this.http.put(environment.serverUrl + '/user/change/copy', copy);
   }
 
 }

@@ -10,7 +10,7 @@ import { Hire } from 'src/models/hire';
 export class HireService {
   constructor(private http: HttpClient) {}
 
-  public passerCommande(hire: Hire): Observable<any> {
+  public createHire(hire: Hire): Observable<any> {
     return this.http.post(environment.serverUrl + '/user/commande', hire);
   }
 
@@ -23,6 +23,6 @@ export class HireService {
   }
 
   public validateHire(hire: Hire): Observable<any> {
-    return this.http.post(environment.serverUrl + '/admin/validate/hire', hire);
+    return this.http.put(environment.serverUrl + '/admin/validate/hire', hire);
   }
 }

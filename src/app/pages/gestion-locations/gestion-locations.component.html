@@ -1,7 +1,7 @@
 <div>
     <span>Les réservations en attente : </span>
     <table *ngFor="let hire of listeHires" class="equal-width-table">
-        <ng-container *ngIf="hire.status == 'en attente'">
+        <ng-container *ngIf="hire.status == 'pending'">
             <thead>
                 <tr>
                     <th>Emprunteur</th>
@@ -18,7 +18,7 @@
                 <td> {{hire.copy.material.wording}} </td>
                 <td> {{hire.dateHire}} </td>
                 <td> {{hire.datePlannedReturn}} </td>
-                <td> {{hire.status}} </td>
+                <td> en attente </td>
                 <td class="localisationTd"> {{hire.eventHire.nameEvent}} </td>
                 <td>
                     <button mat-raised-button color="primary" (click)="openDialog('0ms', '0ms', hire)">Valider</button>
@@ -33,7 +33,7 @@
 <div>
     <span>Les reservations en cours : </span>
     <table *ngFor="let hire of  listeHires" class="equal-width-table">
-        <ng-container *ngIf="hire.status == 'en cours'">
+        <ng-container *ngIf="hire.status == 'on going'">
             <thead>
                 <tr>
                     <th>Emprunteur</th>
@@ -49,7 +49,7 @@
                 <td> {{hire.copy.material.wording}} </td>
                 <td> {{hire.dateHire}} </td>
                 <td> {{hire.datePlannedReturn}} </td>
-                <td> {{hire.status}} </td>
+                <td> en cours </td>
                 <td class="localisationTd"> {{hire.eventHire.nameEvent}} </td>
             </tbody>
         </ng-container>

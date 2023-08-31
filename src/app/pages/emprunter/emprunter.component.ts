@@ -156,7 +156,7 @@ export class EmprunterComponent {
 
       if (this.formHire.valid) {
         this.hireService
-          .passerCommande(hire)
+          .createHire(hire)
           .subscribe((resultat) =>
             this.router.navigateByUrl('accueil/mes-reservations')
           );
@@ -186,7 +186,7 @@ export class EmprunterComponent {
     if (pickerDebut && pickerFin && pickerDebut.value && pickerFin.value) {
       const dateDebut = new Date(pickerDebut.value);
       const dateFin = new Date(pickerFin.value);
-      console.log('2 - je suis rentré dans la vérif');
+  
 
       // vérification si la date de début est supérieure à la date de fin:
       if (dateDebut > dateFin) {
